@@ -1,0 +1,470 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Deploy all micro-apps to GitHub Pages (gh-pages branch)
+# Usage: bash scripts/deploy.sh
+
+REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+DEPLOY_DIR=$(mktemp -d)
+
+echo "==> Preparing deployment in $DEPLOY_DIR"
+
+# Copy each app's dist/ into the deploy directory
+for app_dir in "$REPO_ROOT"/apps/*/; do
+  app_name=$(basename "$app_dir")
+  dist="$app_dir/dist"
+  if [ -d "$dist" ]; then
+    echo "  Copying $app_name"
+    cp -r "$dist" "$DEPLOY_DIR/$app_name"
+  else
+    echo "  WARNING: $app_name has no dist/ — skipping"
+  fi
+done
+
+# Generate landing page with all apps
+cat > "$DEPLOY_DIR/index.html" << 'LANDING_EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Micro Apps — Handy Single-Purpose Utilities</title>
+  <meta name="description" content="A collection of beautifully crafted, single-purpose utility apps. Free, fast, and works on any device." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 1rem 3rem;
+      background: #f0f2f5;
+      color: #1e293b;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3.5rem 1rem 2.5rem;
+      max-width: 600px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+
+    .hero .count {
+      display: inline-block;
+      margin-top: 0.75rem;
+      padding: 0.25rem 0.75rem;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+      max-width: 1040px;
+      width: 100%;
+    }
+
+    .card {
+      position: relative;
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.5rem 1.5rem 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.5rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    .card p {
+      color: #64748b;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.8rem;
+    }
+
+    .footer a {
+      color: #8b5cf6;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero { padding: 2.5rem 0.5rem 2rem; }
+      .grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body { background: #0f172a; color: #e2e8f0; }
+      .hero p { color: #94a3b8; }
+      .card { background: #1e293b; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+      .card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+      .card p { color: #94a3b8; }
+      .footer { color: #475569; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <h1>Micro Apps</h1>
+    <p>A collection of beautifully crafted, single-purpose utilities. Free, fast, and works on any device.</p>
+    <span class="count">30 apps and counting</span>
+  </div>
+
+  <div class="grid">
+    <a class="card" href="./concrete-calc/" style="--accent:#6B7280">
+      <div class="card-header">
+        <span class="dot" style="background:#6B7280"></span>
+        <h2>Concrete Calculator</h2>
+      </div>
+      <p>Calculate concrete volume in cubic yards, meters, and bags needed for your project.</p>
+    </a>
+
+    <a class="card" href="./pomodoro-adhd/" style="--accent:#EF4444">
+      <div class="card-header">
+        <span class="dot" style="background:#EF4444"></span>
+        <h2>Pomodoro Timer</h2>
+      </div>
+      <p>ADHD-friendly Pomodoro timer with visual countdown, streaks, and ambient sounds.</p>
+    </a>
+
+    <a class="card" href="./group-maker/" style="--accent:#8B5CF6">
+      <div class="card-header">
+        <span class="dot" style="background:#8B5CF6"></span>
+        <h2>Group Maker</h2>
+      </div>
+      <p>Randomly split a list of names into balanced groups instantly.</p>
+    </a>
+
+    <a class="card" href="./tile-calc/" style="--accent:#3B82F6">
+      <div class="card-header">
+        <span class="dot" style="background:#3B82F6"></span>
+        <h2>Tile Calculator</h2>
+      </div>
+      <p>Calculate tile square footage, number of tiles needed, and cost estimates.</p>
+    </a>
+
+    <a class="card" href="./word-counter/" style="--accent:#10B981">
+      <div class="card-header">
+        <span class="dot" style="background:#10B981"></span>
+        <h2>Word Counter</h2>
+      </div>
+      <p>Real-time word, character, and sentence counter with keyword density analysis.</p>
+    </a>
+
+    <a class="card" href="./tip-splitter/" style="--accent:#F59E0B">
+      <div class="card-header">
+        <span class="dot" style="background:#F59E0B"></span>
+        <h2>Tip Calculator &amp; Bill Splitter</h2>
+      </div>
+      <p>Calculate tips, split bills between friends, and figure out who owes what.</p>
+    </a>
+
+    <a class="card" href="./password-gen/" style="--accent:#06B6D4">
+      <div class="card-header">
+        <span class="dot" style="background:#06B6D4"></span>
+        <h2>Password Generator</h2>
+      </div>
+      <p>Generate strong, secure passwords with customizable length and character options.</p>
+    </a>
+
+    <a class="card" href="./color-palette/" style="--accent:#EC4899">
+      <div class="card-header">
+        <span class="dot" style="background:#EC4899"></span>
+        <h2>Color Palette Generator</h2>
+      </div>
+      <p>Create beautiful color palettes with harmony rules, contrast checks, and export options.</p>
+    </a>
+
+    <a class="card" href="./loan-calc/" style="--accent:#059669">
+      <div class="card-header">
+        <span class="dot" style="background:#059669"></span>
+        <h2>Loan &amp; Mortgage Calculator</h2>
+      </div>
+      <p>Calculate monthly payments, total interest, and amortization schedules for any loan.</p>
+    </a>
+
+    <a class="card" href="./qr-gen/" style="--accent:#7C3AED">
+      <div class="card-header">
+        <span class="dot" style="background:#7C3AED"></span>
+        <h2>QR Code Generator</h2>
+      </div>
+      <p>Generate QR codes for URLs, text, Wi-Fi, contacts, and more with custom styling.</p>
+    </a>
+
+    <a class="card" href="./fuel-calc/" style="--accent:#F97316">
+      <div class="card-header">
+        <span class="dot" style="background:#F97316"></span>
+        <h2>Fuel Cost Calculator</h2>
+      </div>
+      <p>Calculate fuel costs for trips based on distance, fuel efficiency, and gas prices.</p>
+    </a>
+
+    <a class="card" href="./age-calc/" style="--accent:#E11D48">
+      <div class="card-header">
+        <span class="dot" style="background:#E11D48"></span>
+        <h2>Age Calculator</h2>
+      </div>
+      <p>Calculate your exact age in years, months, days, and find your next birthday countdown.</p>
+    </a>
+
+    <a class="card" href="./json-formatter/" style="--accent:#2563EB">
+      <div class="card-header">
+        <span class="dot" style="background:#2563EB"></span>
+        <h2>JSON Formatter &amp; Validator</h2>
+      </div>
+      <p>Format, validate, and minify JSON with syntax highlighting and error detection.</p>
+    </a>
+
+    <a class="card" href="./habit-tracker/" style="--accent:#16A34A">
+      <div class="card-header">
+        <span class="dot" style="background:#16A34A"></span>
+        <h2>Habit Tracker</h2>
+      </div>
+      <p>Track daily habits with streaks, completion rates, and a visual contribution calendar.</p>
+    </a>
+
+    <a class="card" href="./unit-converter/" style="--accent:#9333EA">
+      <div class="card-header">
+        <span class="dot" style="background:#9333EA"></span>
+        <h2>Unit Converter</h2>
+      </div>
+      <p>Convert between units of length, weight, temperature, volume, speed, and more.</p>
+    </a>
+
+    <a class="card" href="./countdown-timer/" style="--accent:#DC2626">
+      <div class="card-header">
+        <span class="dot" style="background:#DC2626"></span>
+        <h2>Countdown Timer</h2>
+      </div>
+      <p>Create countdown timers for events and deadlines with real-time tracking.</p>
+    </a>
+
+    <a class="card" href="./bmi-calc/" style="--accent:#0891B2">
+      <div class="card-header">
+        <span class="dot" style="background:#0891B2"></span>
+        <h2>BMI Calculator</h2>
+      </div>
+      <p>Calculate your Body Mass Index with visual indicators and health range information.</p>
+    </a>
+
+    <a class="card" href="./stopwatch/" style="--accent:#EA580C">
+      <div class="card-header">
+        <span class="dot" style="background:#EA580C"></span>
+        <h2>Stopwatch &amp; Lap Timer</h2>
+      </div>
+      <p>Precision stopwatch with lap tracking, split times, and exportable results.</p>
+    </a>
+
+    <a class="card" href="./percentage-calc/" style="--accent:#4F46E5">
+      <div class="card-header">
+        <span class="dot" style="background:#4F46E5"></span>
+        <h2>Percentage Calculator</h2>
+      </div>
+      <p>Calculate percentages, percentage changes, and find what percent one number is of another.</p>
+    </a>
+
+    <a class="card" href="./text-case/" style="--accent:#0D9488">
+      <div class="card-header">
+        <span class="dot" style="background:#0D9488"></span>
+        <h2>Text Case Converter</h2>
+      </div>
+      <p>Convert text between uppercase, lowercase, title case, camelCase, and more formats.</p>
+    </a>
+
+    <!-- Wave 5 -->
+    <a class="card" href="./aspect-ratio/" style="--accent:#7C3AED">
+      <div class="card-header">
+        <span class="dot" style="background:#7C3AED"></span>
+        <h2>Aspect Ratio Calculator</h2>
+      </div>
+      <p>Calculate and convert aspect ratios for images, video, and responsive design.</p>
+    </a>
+
+    <a class="card" href="./flashcards/" style="--accent:#F59E0B">
+      <div class="card-header">
+        <span class="dot" style="background:#F59E0B"></span>
+        <h2>Flashcard Study Tool</h2>
+      </div>
+      <p>Create, study, and master flashcard decks with spaced repetition and progress tracking.</p>
+    </a>
+
+    <a class="card" href="./gradient-gen/" style="--accent:#EC4899">
+      <div class="card-header">
+        <span class="dot" style="background:#EC4899"></span>
+        <h2>Gradient Generator</h2>
+      </div>
+      <p>Create beautiful CSS gradients with a visual editor and one-click code export.</p>
+    </a>
+
+    <a class="card" href="./invoice-gen/" style="--accent:#059669">
+      <div class="card-header">
+        <span class="dot" style="background:#059669"></span>
+        <h2>Invoice Generator</h2>
+      </div>
+      <p>Create professional invoices with line items, tax calculations, and PDF export.</p>
+    </a>
+
+    <a class="card" href="./noise-gen/" style="--accent:#6366F1">
+      <div class="card-header">
+        <span class="dot" style="background:#6366F1"></span>
+        <h2>Background Noise Generator</h2>
+      </div>
+      <p>Generate white, pink, and brown noise for focus, sleep, and relaxation.</p>
+    </a>
+
+    <!-- Wave 6 -->
+    <a class="card" href="./markdown-preview/" style="--accent:#2563EB">
+      <div class="card-header">
+        <span class="dot" style="background:#2563EB"></span>
+        <h2>Markdown Preview Editor</h2>
+      </div>
+      <p>Write and preview Markdown in real-time with syntax highlighting and export options.</p>
+    </a>
+
+    <a class="card" href="./screen-test/" style="--accent:#10B981">
+      <div class="card-header">
+        <span class="dot" style="background:#10B981"></span>
+        <h2>Screen Resolution Tester</h2>
+      </div>
+      <p>Test your screen resolution, pixel density, color accuracy, and display capabilities.</p>
+    </a>
+
+    <a class="card" href="./regex-tester/" style="--accent:#F97316">
+      <div class="card-header">
+        <span class="dot" style="background:#F97316"></span>
+        <h2>Regex Tester</h2>
+      </div>
+      <p>Test and debug regular expressions with real-time matching, groups, and a cheat sheet.</p>
+    </a>
+
+    <a class="card" href="./color-convert/" style="--accent:#E11D48">
+      <div class="card-header">
+        <span class="dot" style="background:#E11D48"></span>
+        <h2>Color Picker &amp; Converter</h2>
+      </div>
+      <p>Pick colors and convert between HEX, RGB, HSL, and HSB with a visual color wheel.</p>
+    </a>
+
+    <a class="card" href="./emi-calc/" style="--accent:#0891B2">
+      <div class="card-header">
+        <span class="dot" style="background:#0891B2"></span>
+        <h2>Loan EMI Calculator</h2>
+      </div>
+      <p>Calculate equated monthly installments with amortization schedules and comparison tools.</p>
+    </a>
+  </div>
+
+  <div class="footer">
+    <p>Built with React + TypeScript + Vite &mdash; <a href="https://github.com/zcag/micro-apps">View on GitHub</a></p>
+  </div>
+</body>
+</html>
+LANDING_EOF
+
+# Deploy to gh-pages
+cd "$REPO_ROOT"
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+CURRENT_SHA=$(git rev-parse --short HEAD)
+
+echo "==> Deploying to gh-pages (from $CURRENT_BRANCH @ $CURRENT_SHA)"
+
+# Switch to gh-pages, wipe, copy, commit, push
+git checkout gh-pages
+# Remove everything except .git
+find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
+# Copy deploy contents
+cp -r "$DEPLOY_DIR"/* .
+# Add .nojekyll to skip Jekyll processing
+touch .nojekyll
+
+git add -A
+if git diff --cached --quiet; then
+  echo "No changes to deploy"
+else
+  git commit -m "Deploy wave 6: all 30 apps (from $CURRENT_SHA)"
+  git push origin gh-pages
+  echo "==> Deployed successfully!"
+fi
+
+# Return to original branch
+git checkout "$CURRENT_BRANCH"
+
+# Cleanup
+rm -rf "$DEPLOY_DIR"
+echo "==> Done!"
