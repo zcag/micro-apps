@@ -1,0 +1,499 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Input Section ── */
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fieldLabel {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.mainInput {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mainInput:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.detectedBadge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+}
+
+.controls {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.controlGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controlLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--text-secondary);
+}
+
+/* ── Base Cards Grid ── */
+.basesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.baseCard {
+  padding: 14px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.baseCard:hover {
+  border-color: rgba(139, 92, 246, 0.3);
+  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.08);
+}
+
+.baseCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.baseLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.baseValue {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+  line-height: 1.4;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+  cursor: text;
+  text-align: left;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  width: 100%;
+}
+
+.baseValue:hover {
+  border-color: var(--border);
+  background: var(--bg-secondary);
+}
+
+.basePrefix {
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-right: 2px;
+}
+
+.baseEditInput {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg-secondary);
+  border: 1.5px solid #8b5cf6;
+  border-radius: var(--radius-sm);
+  padding: 4px 6px;
+  outline: none;
+  width: 100%;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.copySmall {
+  padding: 3px 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  flex-shrink: 0;
+}
+
+.copySmall:hover {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+/* ── Mono value (shared) ── */
+.monoValue {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+}
+
+/* ── Custom Base ── */
+.customBaseSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.customBaseHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.customBaseInput {
+  width: 64px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+
+.customBaseInput::-webkit-outer-spin-button,
+.customBaseInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.customBaseInput:focus {
+  border-color: #8b5cf6;
+}
+
+.customBaseResult {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+/* ── Bit Visualization ── */
+.bitSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bitGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+}
+
+.bitCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.bitSquare {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1.5px solid var(--border);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+
+.bitOn {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  border-color: #8b5cf6;
+  box-shadow: 0 1px 4px rgba(139, 92, 246, 0.3);
+}
+
+.bitOff {
+  background: var(--bg-secondary);
+}
+
+.bitSquare:hover {
+  transform: scale(1.15);
+}
+
+.bitSquare:active {
+  transform: scale(0.9);
+}
+
+.bitIndex {
+  font-size: 0.55rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Bitwise Operations ── */
+.bitwiseSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bitwiseInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bwInput {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.bwInput:focus {
+  border-color: #8b5cf6;
+}
+
+.bwOpSelector {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.bwOpBtn {
+  padding: 6px 12px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.bwOpBtn:hover {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+.bwOpActive {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+.bwResult {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 14px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid #8b5cf6;
+}
+
+.bwResultRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bwResultLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  width: 32px;
+  flex-shrink: 0;
+}
+
+/* ── Collapsible Header ── */
+.collapsibleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+.toggleArrow {
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+/* ── Float Inspector ── */
+.floatSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.floatResult {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.floatSpecial {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.floatRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.floatRow:last-of-type {
+  border-bottom: none;
+}
+
+.floatLabel {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.floatSign {
+  color: #ef4444;
+}
+
+.floatExponent {
+  color: #3b82f6;
+}
+
+.floatMantissa {
+  color: #22c55e;
+}
+
+.floatBits {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  margin-top: 4px;
+}
+
+.floatBitsLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.floatBitsValue {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  word-break: break-all;
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .basesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bitSquare {
+    width: 18px;
+    height: 18px;
+  }
+
+  .bitIndex {
+    font-size: 0.48rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bwOpSelector {
+    gap: 4px;
+  }
+
+  .bwOpBtn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+}
