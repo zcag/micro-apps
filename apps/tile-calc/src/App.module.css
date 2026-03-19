@@ -4,57 +4,742 @@
   gap: 0;
 }
 
-.section {
-  margin-bottom: 16px;
-}
-
-.heading {
-  font-size: 15px;
+/* ── Section Headers ── */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
   margin-bottom: 12px;
 }
 
-.inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.sectionHeaderIcon {
+  font-size: 14px;
+  opacity: 0.7;
 }
 
-.buttonRow {
-  margin-top: 16px;
+.sectionDivider {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  opacity: 0.5;
 }
 
-.results {
+/* ── Tile Preview Section (Hero) ── */
+.previewSection {
+  margin-bottom: 16px;
+}
+
+.previewHeader {
+  margin-bottom: 16px;
+}
+
+.colorControls {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.colorPalette {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorPaletteLabel {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  min-width: 36px;
+}
+
+.colorSwatches {
+  display: flex;
+  gap: 6px;
+}
+
+.colorSwatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  padding: 0;
+  outline: none;
+}
+
+.colorSwatch:hover {
+  transform: scale(1.15);
+  box-shadow: var(--shadow-sm);
+}
+
+.colorSwatchActive {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+  transform: scale(1.1);
 }
 
 .previewContainer {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
+  min-height: 280px;
   padding: 16px 0;
 }
 
+.previewFrame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: fadeIn 0.4s ease;
+}
+
+.previewRoomFrame {
+  position: relative;
+  padding-top: 28px;
+  padding-left: 28px;
+}
+
+/* Ruler along top */
+.previewRulerTop {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewRulerTop::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.previewRulerTop::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  height: 6px;
+  background: var(--text-secondary);
+  opacity: 0.3;
+  box-shadow: calc(100% - 1px) 0 0 0 var(--text-secondary);
+}
+
+/* Ruler along side */
+.previewRulerSide {
+  position: absolute;
+  left: 0;
+  top: 28px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.previewRulerSide::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.previewRulerLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.previewRulerSide .previewRulerLabel {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+/* The tile grid */
 .previewGrid {
   display: grid;
-  background-color: var(--text-secondary);
   border-radius: 4px;
   overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 2px solid var(--border);
+  transition: all var(--transition-normal) ease;
 }
 
 .previewTile {
-  background-color: var(--accent, #0071e3);
-  opacity: 0.7;
-  border-radius: 1px;
   min-width: 0;
   min-height: 0;
+  border-radius: 1px;
+  transition: background-color var(--transition-normal) ease;
+  /* 3D bevel effect */
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.25),
+    inset -1px -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.previewTile:hover {
+  filter: brightness(1.15);
+  z-index: 1;
 }
 
 .previewLabel {
   font-size: 13px;
   color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.previewLabelNote {
+  font-size: 11px;
+  opacity: 0.5;
+}
+
+/* Pattern note */
+.patternNote {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.patternNoteFuture {
+  opacity: 0.4;
+  font-style: italic;
+}
+
+/* ── Empty Preview ── */
+.emptyPreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+  animation: fadeIn 0.4s ease;
+}
+
+.emptyPreviewIcon {
+  font-size: 40px;
+  opacity: 0.3;
+  animation: emptyBounce 3s ease-in-out infinite;
+}
+
+.emptyPreviewRoom {
+  width: 200px;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyRoomOutline {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--border) 5%, transparent);
+}
+
+.emptyRoomLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.emptyPreviewHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.4;
+}
+
+/* ── Hero Input Section ── */
+.heroSection {
+  background: linear-gradient(
+    168deg,
+    var(--bg) 0%,
+    var(--bg-secondary) 40%,
+    var(--bg) 100%
+  );
+  border-radius: var(--radius-lg);
+  padding: 4px;
+  margin-bottom: 16px;
+}
+
+.unitSection {
+  margin-bottom: 20px;
+}
+
+/* ── Room Presets ── */
+.presetSection {
+  margin-bottom: 20px;
+}
+
+.presetChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.presetChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.presetChip:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-secondary));
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.presetChip:active {
+  transform: scale(0.96);
+}
+
+.presetEmoji {
+  font-size: 15px;
+}
+
+.presetDims {
+  font-size: 11px;
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+/* ── Input Groups ── */
+.inputGroup {
+  position: relative;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+}
+
+.inputGroupLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.inputGroupOptional {
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  opacity: 0.5;
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: var(--border);
+  margin-left: auto;
+}
+
+.inputGroupFields {
+  display: flex;
+  gap: 10px;
+}
+
+.inputGroupFields > * {
+  flex: 1;
+  min-width: 0;
+}
+
+.inputGroupFieldsSingle {
+  margin-top: 10px;
+  max-width: 200px;
+}
+
+.inputConnector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 20px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.5;
+  padding-top: 18px;
+}
+
+/* ── Calculate Area ── */
+.calculateArea {
+  margin-top: 4px;
+}
+
+.validIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 500;
+  margin-bottom: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* ── Results Divider ── */
+.resultsDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  opacity: 0.6;
+}
+
+.resultsDividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.resultsDividerIcon {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ── Results ── */
+.resultsContainer {
+  animation: fadeInUp 0.4s ease both;
+}
+
+/* Primary result — big, prominent */
+.primaryResult {
+  text-align: center;
+  padding: 28px 16px 20px;
+  margin-bottom: 16px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 6%, var(--card-bg)),
+    color-mix(in srgb, var(--accent) 12%, var(--card-bg))
+  );
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+}
+
+.primaryResultLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.primaryResultValue {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+.primaryResultUnit {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.wasteBadge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--success) 10%, var(--bg-secondary));
+  color: var(--success);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid color-mix(in srgb, var(--success) 20%, var(--border));
+}
+
+/* Secondary results grid */
+.secondaryResults {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.secondaryCard {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  border: 1px solid var(--border);
+  text-align: center;
+  animation: fadeInUp 0.4s ease both;
+  transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.secondaryCard:nth-child(1) { animation-delay: 0.05s; }
+.secondaryCard:nth-child(2) { animation-delay: 0.1s; }
+.secondaryCard:nth-child(3) { animation-delay: 0.15s; }
+.secondaryCard:nth-child(4) { animation-delay: 0.2s; }
+
+.secondaryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.secondaryCardEmoji {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.secondaryCardValue {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.secondaryCardLabel {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* ── Cost Summary Card ── */
+.costCard {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--warning) 4%, var(--card-bg)),
+    color-mix(in srgb, var(--warning) 8%, var(--card-bg))
+  );
+  border: 1px solid color-mix(in srgb, var(--warning) 15%, var(--border));
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+  animation: fadeInUp 0.4s ease 0.25s both;
+}
+
+.costCardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.costCardIcon {
+  font-size: 16px;
+}
+
+.costCardGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.costRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+
+.costRow + .costRow {
+  border-top: 1px solid var(--border);
+}
+
+.costRowLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.costRowValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.costRowHighlight {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  margin: 0 -8px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+}
+
+.costRowHighlight .costRowValue {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+/* ── Copy Button ── */
+.copyButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  animation: fadeInUp 0.4s ease 0.3s both;
+}
+
+.copyButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg-secondary));
+}
+
+.copyButton:active {
+  transform: scale(0.97);
+}
+
+.copyButtonCopied {
+  border-color: var(--success);
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 8%, var(--bg-secondary));
+}
+
+.copyIcon {
+  transition: transform var(--transition-fast) ease;
+}
+
+.copyButtonCopied .copyIcon {
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Empty State ── */
+.emptyState {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-secondary);
+  animation: fadeIn 0.4s ease;
+}
+
+.emptyStateIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.emptyStateText {
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.emptyStateHint {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.4;
+}
+
+/* ── Responsive ── */
+@media (max-width: 400px) {
+  .inputGroupFields {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .inputConnector {
+    display: none;
+  }
+
+  .secondaryResults {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .primaryResultValue {
+    font-size: 36px;
+  }
+
+  .colorControls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .previewContainer {
+    min-height: 220px;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes emptyBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
