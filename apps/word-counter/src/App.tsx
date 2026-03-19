@@ -134,7 +134,7 @@ export default function App() {
 
   const handleCopyStats = useCallback(() => {
     const summary = `Words: ${stats.words} | Characters: ${stats.charsWithSpaces} | Sentences: ${stats.sentences} | Reading time: ${stats.readingMin}m ${stats.readingSec}s`;
-    navigator.clipboard.writeText(summary);
+    navigator.clipboard.writeText(summary).catch(() => {});
   }, [stats]);
 
   const handleClear = useCallback(() => {

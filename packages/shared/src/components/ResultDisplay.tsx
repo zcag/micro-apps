@@ -61,7 +61,7 @@ export function ResultDisplay({ label, value, unit, style }: ResultDisplayProps)
     navigator.clipboard.writeText(text).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    });
+    }).catch(() => {});
   }, [value, unit]);
 
   return (

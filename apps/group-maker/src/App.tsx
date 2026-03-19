@@ -148,7 +148,7 @@ export default function App() {
     navigator.clipboard.writeText(formatGroupsText(groups)).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    });
+    }).catch(() => {});
   };
 
   const handleShareLink = () => {
@@ -158,7 +158,7 @@ export default function App() {
     navigator.clipboard.writeText(url).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    });
+    }).catch(() => {});
   };
 
   return (

@@ -110,7 +110,7 @@ export default function App() {
     navigator.clipboard.writeText(lines).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
-    });
+    }).catch(() => {});
   };
 
   const suffix = unit === 'imperial' ? 'ft' : 'm';
