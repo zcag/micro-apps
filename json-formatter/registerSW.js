@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/json-formatter/sw.js', { scope: '/micro-apps/json-formatter/' })})}
