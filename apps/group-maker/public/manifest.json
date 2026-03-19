@@ -1,9 +1,0 @@
-{
-  "name": "Random Group Maker",
-  "short_name": "Group Maker",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0071e3",
-  "icons": []
-}
