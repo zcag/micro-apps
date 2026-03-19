@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   Layout,
   Card,
   Input,
   Button,
-  ResultDisplay,
   SegmentedControl,
   trackEvent,
 } from '@micro-apps/shared';
@@ -25,10 +24,10 @@ interface Results {
   bags80: number;
 }
 
-const PRESETS: { label: string; dims: Dimensions }[] = [
-  { label: 'Sidewalk (4ft × 20ft × 4in)', dims: { length: '4', width: '20', depth: '0.333' } },
-  { label: 'Patio (10ft × 10ft × 4in)', dims: { length: '10', width: '10', depth: '0.333' } },
-  { label: 'Footing (2ft × 2ft × 1ft)', dims: { length: '2', width: '2', depth: '1' } },
+const PRESETS: { label: string; emoji: string; dims: Dimensions }[] = [
+  { label: 'Sidewalk', emoji: '🚶', dims: { length: '4', width: '20', depth: '0.333' } },
+  { label: 'Patio', emoji: '🏡', dims: { length: '10', width: '10', depth: '0.333' } },
+  { label: 'Footing', emoji: '🏗️', dims: { length: '2', width: '2', depth: '1' } },
 ];
 
 const STORAGE_KEY = 'concrete-calc-last';
@@ -52,8 +51,7 @@ function calculate(dims: Dimensions, unit: UnitSystem): Results | null {
   if (unit === 'imperial') {
     cubicFt = l * w * d;
   } else {
-    // Input in meters, convert to cubic ft for bag calculations
-    cubicFt = l * w * d * 35.3147; // 1 m³ = 35.3147 ft³
+    cubicFt = l * w * d * 35.3147;
   }
 
   const cubicYards = cubicFt / 27;
@@ -62,6 +60,50 @@ function calculate(dims: Dimensions, unit: UnitSystem): Results | null {
   const bags80 = Math.ceil(cubicFt / 0.6);
 
   return { cubicYards, cubicMeters, bags60, bags80 };
+}
+
+/** Animated count-up hook */
+function useCountUp(target: number, duration = 600): number {
+  const [display, setDisplay] = useState(target);
+  const rafRef = useRef<number>();
+
+  useEffect(() => {
+    const start = display;
+    const diff = target - start;
+    if (Math.abs(diff) < 0.001) {
+      setDisplay(target);
+      return;
+    }
+
+    const startTime = performance.now();
+    const animate = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(start + diff * eased);
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(animate);
+      }
+    };
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target, duration]);
+
+  return display;
+}
+
+function AnimatedValue({ value, decimals = 2 }: { value: number; decimals?: number }) {
+  const animated = useCountUp(value);
+  return <>{animated.toFixed(decimals)}</>;
+}
+
+function AnimatedInt({ value }: { value: number }) {
+  const animated = useCountUp(value);
+  return <>{Math.round(animated)}</>;
 }
 
 export default function App() {
@@ -75,12 +117,10 @@ export default function App() {
   const [results, setResults] = useState<Results | null>(null);
   const [copied, setCopied] = useState(false);
 
-  // Recalculate when restored from localStorage
   useEffect(() => {
     if (saved && dims.length && dims.width && dims.depth) {
       setResults(calculate(dims, unit));
     }
-    // Only on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -94,7 +134,6 @@ export default function App() {
   };
 
   const handlePreset = (preset: (typeof PRESETS)[number]) => {
-    // Presets are in imperial (ft)
     setUnit('imperial');
     setDims(preset.dims);
     setResults(null);
@@ -114,102 +153,196 @@ export default function App() {
   };
 
   const suffix = unit === 'imperial' ? 'ft' : 'm';
+  const hasValidInputs = dims.length && dims.width && dims.depth &&
+    parseFloat(dims.length) > 0 && parseFloat(dims.width) > 0 && parseFloat(dims.depth) > 0;
 
   return (
     <Layout title="Concrete Calculator">
       <div className={styles.container}>
-        <Card>
-          <div className={styles.section}>
-            <SegmentedControl
-              options={[
-                { label: 'Imperial (ft)', value: 'imperial' },
-                { label: 'Metric (m)', value: 'metric' },
-              ]}
-              value={unit}
-              onChange={(v) => {
-                setUnit(v);
-                setResults(null);
-              }}
-            />
-          </div>
-
-          <div className={styles.section}>
-            <label className={styles.selectLabel}>Common Presets</label>
-            <select
-              className={styles.select}
-              value=""
-              onChange={(e) => {
-                const idx = parseInt(e.target.value);
-                if (!isNaN(idx)) handlePreset(PRESETS[idx]);
-              }}
-            >
-              <option value="">Select a preset...</option>
-              {PRESETS.map((p, i) => (
-                <option key={i} value={i}>
-                  {p.label}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles.inputs}>
-            <Input
-              label="Length"
-              suffix={suffix}
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="any"
-              value={dims.length}
-              onChange={(e) => setDims({ ...dims, length: e.target.value })}
-            />
-            <Input
-              label="Width"
-              suffix={suffix}
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="any"
-              value={dims.width}
-              onChange={(e) => setDims({ ...dims, width: e.target.value })}
-            />
-            <Input
-              label="Depth"
-              suffix={suffix}
-              type="number"
-              inputMode="decimal"
-              min="0"
-              step="any"
-              value={dims.depth}
-              onChange={(e) => setDims({ ...dims, depth: e.target.value })}
-            />
-          </div>
-
-          <Button onClick={handleCalculate} haptic>
-            Calculate
-          </Button>
-        </Card>
-
-        {results && (
-          <Card style={{ marginTop: '16px' }}>
-            <div className={styles.results}>
-              {unit === 'imperial' && (
-                <ResultDisplay
-                  label="Volume"
-                  value={results.cubicYards.toFixed(2)}
-                  unit="cubic yards"
-                />
-              )}
-              <ResultDisplay
-                label="Volume"
-                value={results.cubicMeters.toFixed(2)}
-                unit="cubic meters"
+        <div className={styles.heroSection}>
+          <Card>
+            {/* Unit toggle */}
+            <div className={styles.unitSection}>
+              <SegmentedControl
+                options={[
+                  { label: 'Imperial (ft)', value: 'imperial' },
+                  { label: 'Metric (m)', value: 'metric' },
+                ]}
+                value={unit}
+                onChange={(v) => {
+                  setUnit(v);
+                  setResults(null);
+                }}
               />
-              <ResultDisplay label="60lb Bags Needed" value={results.bags60} unit="bags" />
-              <ResultDisplay label="80lb Bags Needed" value={results.bags80} unit="bags" />
-              <Button variant="secondary" onClick={handleCopyAll}>
-                {copied ? 'Copied!' : 'Copy All Results'}
+            </div>
+
+            {/* Preset chips */}
+            <div className={styles.presetSection}>
+              <div className={styles.sectionHeader}>
+                <span className={styles.sectionHeaderIcon}>📐</span>
+                <span>Quick Presets</span>
+                <span className={styles.sectionDivider} />
+              </div>
+              <div className={styles.presetChips}>
+                {PRESETS.map((p, i) => (
+                  <button
+                    key={i}
+                    className={styles.presetChip}
+                    onClick={() => handlePreset(p)}
+                    type="button"
+                  >
+                    <span className={styles.presetEmoji}>{p.emoji}</span>
+                    {p.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Dimensions input group */}
+            <div className={styles.inputGroup}>
+              <div className={styles.inputGroupLabel}>
+                📏 Dimensions
+              </div>
+              <div className={styles.inputGroupFields}>
+                <Input
+                  label="Length"
+                  suffix={suffix}
+                  type="number"
+                  inputMode="decimal"
+                  min="0"
+                  step="any"
+                  value={dims.length}
+                  onChange={(e) => setDims({ ...dims, length: e.target.value })}
+                />
+                <span className={styles.inputConnector}>×</span>
+                <Input
+                  label="Width"
+                  suffix={suffix}
+                  type="number"
+                  inputMode="decimal"
+                  min="0"
+                  step="any"
+                  value={dims.width}
+                  onChange={(e) => setDims({ ...dims, width: e.target.value })}
+                />
+                <span className={styles.inputConnector}>×</span>
+                <Input
+                  label="Depth"
+                  suffix={suffix}
+                  type="number"
+                  inputMode="decimal"
+                  min="0"
+                  step="any"
+                  value={dims.depth}
+                  onChange={(e) => setDims({ ...dims, depth: e.target.value })}
+                />
+              </div>
+            </div>
+
+            {/* Valid indicator */}
+            {hasValidInputs && !results && (
+              <div className={styles.validIndicator}>
+                ✓ Ready to calculate
+              </div>
+            )}
+
+            <div className={styles.calculateArea}>
+              <Button variant="gradient" onClick={handleCalculate} haptic>
+                Calculate
               </Button>
+            </div>
+          </Card>
+        </div>
+
+        {/* Results divider */}
+        {results && (
+          <div className={styles.resultsDivider}>
+            <span className={styles.resultsDividerLine} />
+            <span className={styles.resultsDividerIcon}>▼</span>
+            <span className={styles.resultsDividerLine} />
+          </div>
+        )}
+
+        {/* Results */}
+        {results ? (
+          <div className={styles.resultsContainer}>
+            {/* Primary result */}
+            <div className={styles.primaryResult}>
+              <div className={styles.primaryResultLabel}>
+                {unit === 'imperial' ? 'Total Volume' : 'Total Volume'}
+              </div>
+              <div className={styles.primaryResultValue}>
+                <AnimatedValue
+                  value={unit === 'imperial' ? results.cubicYards : results.cubicMeters}
+                />
+              </div>
+              <div className={styles.primaryResultUnit}>
+                {unit === 'imperial' ? 'cubic yards' : 'cubic meters'}
+              </div>
+            </div>
+
+            {/* Secondary results grid */}
+            <div className={styles.secondaryResults}>
+              {unit === 'imperial' && (
+                <div className={styles.secondaryCard}>
+                  <div className={styles.secondaryCardEmoji}>📦</div>
+                  <div className={styles.secondaryCardValue}>
+                    <AnimatedValue value={results.cubicMeters} />
+                  </div>
+                  <div className={styles.secondaryCardLabel}>Cubic Meters</div>
+                </div>
+              )}
+              {unit === 'metric' && (
+                <div className={styles.secondaryCard}>
+                  <div className={styles.secondaryCardEmoji}>📦</div>
+                  <div className={styles.secondaryCardValue}>
+                    <AnimatedValue value={results.cubicYards} />
+                  </div>
+                  <div className={styles.secondaryCardLabel}>Cubic Yards</div>
+                </div>
+              )}
+              <div className={styles.secondaryCard}>
+                <div className={styles.secondaryCardEmoji}>🔢</div>
+                <div className={styles.secondaryCardValue}>
+                  {(results.cubicYards * 27).toFixed(1)}
+                </div>
+                <div className={styles.secondaryCardLabel}>Cubic Feet</div>
+              </div>
+              <div className={styles.secondaryCard}>
+                <div className={styles.secondaryCardEmoji}>🛍️</div>
+                <div className={styles.secondaryCardValue}>
+                  <AnimatedInt value={results.bags60} />
+                </div>
+                <div className={styles.secondaryCardLabel}>60lb Bags</div>
+              </div>
+              <div className={styles.secondaryCard}>
+                <div className={styles.secondaryCardEmoji}>🛍️</div>
+                <div className={styles.secondaryCardValue}>
+                  <AnimatedInt value={results.bags80} />
+                </div>
+                <div className={styles.secondaryCardLabel}>80lb Bags</div>
+              </div>
+            </div>
+
+            {/* Copy button */}
+            <button
+              className={`${styles.copyButton} ${copied ? styles.copyButtonCopied : ''}`}
+              onClick={handleCopyAll}
+              type="button"
+            >
+              <span className={styles.copyIcon}>{copied ? '✓' : '📋'}</span>
+              {copied ? 'Copied!' : 'Copy All Results'}
+            </button>
+          </div>
+        ) : (
+          /* Empty state */
+          <Card>
+            <div className={styles.emptyState}>
+              <div className={styles.emptyStateIcon}>🧱</div>
+              <div className={styles.emptyStateText}>Enter dimensions to calculate</div>
+              <div className={styles.emptyStateHint}>
+                or pick a preset above to get started
+              </div>
             </div>
           </Card>
         )}

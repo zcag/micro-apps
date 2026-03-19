@@ -4,43 +4,384 @@
   gap: 0;
 }
 
-.section {
+/* Hero gradient background behind input area */
+.heroSection {
+  background: linear-gradient(
+    168deg,
+    var(--bg) 0%,
+    var(--bg-secondary) 40%,
+    var(--bg) 100%
+  );
+  border-radius: var(--radius-lg);
+  padding: 4px;
   margin-bottom: 16px;
 }
 
-.inputs {
+/* Section header for input groups */
+.sectionHeader {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
 }
 
-.results {
+.sectionHeaderIcon {
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.sectionDivider {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  opacity: 0.5;
+}
+
+/* Unit toggle area */
+.unitSection {
+  margin-bottom: 20px;
+}
+
+/* Preset chips */
+.presetSection {
+  margin-bottom: 20px;
+}
+
+.presetChips {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.presetChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.presetChip:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-secondary));
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.presetChip:active {
+  transform: scale(0.96);
+}
+
+.presetEmoji {
+  font-size: 15px;
+}
+
+/* Input group with visual connectors */
+.inputGroup {
+  position: relative;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border);
+}
+
+.inputGroupLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+}
+
+.inputGroupFields {
+  display: flex;
   gap: 10px;
 }
 
-.selectLabel {
-  display: block;
+.inputGroupFields > * {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Connector lines between inputs */
+.inputConnector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  width: 20px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
   font-size: 13px;
   font-weight: 500;
+  opacity: 0.5;
+  padding-top: 18px;
+}
+
+/* Calculate button area */
+.calculateArea {
+  margin-top: 4px;
+}
+
+/* Visual divider between inputs and results */
+.resultsDivider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  opacity: 0.6;
+}
+
+.resultsDividerLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+.resultsDividerIcon {
+  font-size: 12px;
   color: var(--text-secondary);
+}
+
+/* Results section */
+.resultsContainer {
+  animation: fadeInUp 0.4s ease both;
+}
+
+/* Primary result - big and prominent */
+.primaryResult {
+  text-align: center;
+  padding: 24px 16px;
+  margin-bottom: 16px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent) 6%, var(--card-bg)),
+    color-mix(in srgb, var(--accent) 12%, var(--card-bg))
+  );
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+}
+
+.primaryResultLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.primaryResultValue {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.1;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+}
+
+.primaryResultUnit {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Secondary results grid */
+.secondaryResults {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.secondaryCard {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  border: 1px solid var(--border);
+  text-align: center;
+  animation: fadeInUp 0.4s ease both;
+  transition: transform var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.secondaryCard:nth-child(1) { animation-delay: 0.05s; }
+.secondaryCard:nth-child(2) { animation-delay: 0.1s; }
+.secondaryCard:nth-child(3) { animation-delay: 0.15s; }
+.secondaryCard:nth-child(4) { animation-delay: 0.2s; }
+
+.secondaryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.secondaryCardEmoji {
+  font-size: 22px;
   margin-bottom: 6px;
 }
 
-.select {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 15px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background-color: var(--bg-secondary);
+.secondaryCardValue {
+  font-size: 22px;
+  font-weight: 700;
   color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.secondaryCardLabel {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* Copy button */
+.copyButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
+  transition: all var(--transition-fast) ease;
+  animation: fadeInUp 0.4s ease 0.25s both;
+}
+
+.copyButton:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, var(--bg-secondary));
+}
+
+.copyButton:active {
+  transform: scale(0.97);
+}
+
+.copyButtonCopied {
+  border-color: var(--success);
+  color: var(--success);
+  background: color-mix(in srgb, var(--success) 8%, var(--bg-secondary));
+}
+
+.copyIcon {
+  transition: transform var(--transition-fast) ease;
+}
+
+.copyButtonCopied .copyIcon {
+  animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Empty state placeholder */
+.emptyState {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-secondary);
+  animation: fadeIn 0.4s ease;
+}
+
+.emptyStateIcon {
+  font-size: 40px;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.emptyStateText {
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.emptyStateHint {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.4;
+}
+
+/* Valid calculation indicator */
+.validIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--success);
+  font-weight: 500;
+  margin-bottom: 8px;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .inputGroupFields {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .inputConnector {
+    display: none;
+  }
+
+  .secondaryResults {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .primaryResultValue {
+    font-size: 36px;
+  }
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* Count-up animation feel via transition */
+.countUp {
+  transition: all 0.3s ease;
 }
