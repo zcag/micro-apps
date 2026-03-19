@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/micro-apps/group-maker/',
   plugins: [
     react(),
     VitePWA({
@@ -11,7 +12,7 @@ export default defineConfig({
         name: 'Group Maker',
         short_name: 'Groups',
         description: 'Randomly split a list of names into balanced groups instantly',
-        start_url: '/',
+        start_url: './',
         display: 'standalone',
         orientation: 'portrait-primary',
         background_color: '#ffffff',

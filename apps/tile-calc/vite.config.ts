@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/micro-apps/tile-calc/',
   plugins: [
     react(),
     VitePWA({
@@ -11,7 +12,7 @@ export default defineConfig({
         name: 'Tile Calculator',
         short_name: 'Tile Calc',
         description: 'Calculate tile square footage, number of tiles needed, and cost estimates',
-        start_url: '/',
+        start_url: './',
         display: 'standalone',
         orientation: 'portrait-primary',
         background_color: '#ffffff',

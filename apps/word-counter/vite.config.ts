@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/micro-apps/word-counter/',
   plugins: [
     react(),
     VitePWA({
@@ -11,7 +12,7 @@ export default defineConfig({
         name: 'Word Counter',
         short_name: 'Word Count',
         description: 'Real-time word, character, and sentence counter with keyword density analysis',
-        start_url: '/',
+        start_url: './',
         display: 'standalone',
         orientation: 'portrait-primary',
         background_color: '#ffffff',

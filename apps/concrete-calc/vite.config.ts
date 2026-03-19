@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/micro-apps/concrete-calc/',
   plugins: [
     react(),
     VitePWA({
@@ -11,7 +12,7 @@ export default defineConfig({
         name: 'Concrete Calculator',
         short_name: 'Concrete Calc',
         description: 'Calculate concrete volume in cubic yards, meters, and bags needed for your project',
-        start_url: '/',
+        start_url: './',
         display: 'standalone',
         orientation: 'portrait-primary',
         background_color: '#ffffff',

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
+  base: '/micro-apps/pomodoro-adhd/',
   plugins: [
     react(),
     VitePWA({
@@ -11,7 +12,7 @@ export default defineConfig({
         name: 'Pomodoro Timer',
         short_name: 'Pomodoro',
         description: 'ADHD-friendly Pomodoro timer with visual countdown and gentle audio cues',
-        start_url: '/',
+        start_url: './',
         display: 'standalone',
         orientation: 'portrait-primary',
         background_color: '#ffffff',
