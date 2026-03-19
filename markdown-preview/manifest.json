@@ -1,0 +1,9 @@
+{
+  "name": "markdown-preview",
+  "short_name": "markdown-preview",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0071e3",
+  "icons": []
+}

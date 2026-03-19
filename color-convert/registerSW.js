@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/color-convert/sw.js', { scope: '/micro-apps/color-convert/' })})}

@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/pomodoro-adhd/sw.js', { scope: '/micro-apps/pomodoro-adhd/' })})}
