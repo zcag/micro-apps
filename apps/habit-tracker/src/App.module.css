@@ -1,0 +1,485 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+/* ── Progress Section ── */
+.progressSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progressHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progressLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.progressCount {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #22c55e;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.progressBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, #22c55e, #84cc16);
+  border-radius: 5px;
+  transition: width var(--transition-normal) ease;
+  min-width: 0;
+}
+
+.motivational {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #22c55e;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(132, 204, 22, 0.1));
+  border-radius: var(--radius-sm);
+  animation: popIn 0.4s ease;
+}
+
+/* ── Habit Card ── */
+.habitCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.habitCard.habitDone {
+  opacity: 0.85;
+}
+
+.habitMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* ── Checkbox ── */
+.checkBtn {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2.5px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all var(--transition-fast) ease;
+  margin-top: 2px;
+}
+
+.checkBtn:hover {
+  border-color: #22c55e;
+}
+
+.checkBtn.checked {
+  background: linear-gradient(135deg, #22c55e, #84cc16);
+  border-color: transparent;
+  animation: popIn 0.3s ease;
+}
+
+/* ── Habit Info ── */
+.habitInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.habitName {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.habitEmoji {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.nameStrikethrough {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.habitStats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+
+.statItem {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.statDivider {
+  font-size: 0.7rem;
+  color: var(--border);
+}
+
+/* ── Habit Actions ── */
+.habitActions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.iconBtn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast) ease;
+}
+
+.iconBtn:hover {
+  background: var(--bg-secondary);
+  color: var(--text);
+}
+
+/* ── Heat Map ── */
+.heatMap {
+  display: flex;
+  gap: 6px;
+  justify-content: space-between;
+}
+
+.heatDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.heatLabel {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.heatCell {
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 36px;
+  border-radius: 6px;
+  transition: all var(--transition-fast) ease;
+}
+
+.heatFilled {
+  background: linear-gradient(135deg, #22c55e, #84cc16);
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+}
+
+.heatEmpty {
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border);
+}
+
+/* ── Empty State ── */
+.emptyState {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  opacity: 0.6;
+  color: var(--text-secondary);
+}
+
+.emptyText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Add Form ── */
+.addForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.addFormTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.addRow,
+.editRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.emojiInput {
+  width: 48px;
+  height: 44px;
+  text-align: center;
+  font-size: 1.3rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition-fast) ease;
+}
+
+.emojiInput:focus {
+  border-color: #22c55e;
+}
+
+.nameInput {
+  flex: 1;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 0.95rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  transition: border-color var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.nameInput:focus {
+  border-color: #22c55e;
+}
+
+.emojiPicker {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.emojiOption {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.emojiOption:hover {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+}
+
+.emojiSelected {
+  border-color: #22c55e;
+  background: rgba(34, 197, 94, 0.15);
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.addActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Edit Form ── */
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.editActions {
+  display: flex;
+  gap: 8px;
+}
+
+.saveBtn,
+.cancelBtn {
+  flex: 1;
+  height: 38px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.saveBtn {
+  background: linear-gradient(135deg, #22c55e, #84cc16);
+  color: white;
+}
+
+.saveBtn:hover {
+  filter: brightness(1.1);
+}
+
+.cancelBtn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.cancelBtn:hover {
+  background: var(--border);
+}
+
+/* ── Overlay / Dialog ── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: fadeIn 0.2s ease;
+}
+
+.dialog {
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  max-width: 340px;
+  width: 100%;
+  box-shadow: var(--shadow-xl);
+  animation: popIn 0.25s ease;
+}
+
+.dialogTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.dialogText {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.dialogActions {
+  display: flex;
+  gap: 10px;
+}
+
+.dialogDeleteBtn,
+.dialogCancelBtn {
+  flex: 1;
+  height: 42px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.dialogDeleteBtn {
+  background: var(--error);
+  color: white;
+}
+
+.dialogDeleteBtn:hover {
+  filter: brightness(1.1);
+}
+
+.dialogCancelBtn {
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.dialogCancelBtn:hover {
+  background: var(--border);
+}
+
+/* ── Animations ── */
+@keyframes popIn {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .habitActions {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .iconBtn {
+    width: 26px;
+    height: 26px;
+  }
+
+  .heatCell {
+    max-width: 28px;
+  }
+
+  .habitStats {
+    gap: 4px;
+  }
+
+  .statItem {
+    font-size: 0.7rem;
+  }
+}
