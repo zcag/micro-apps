@@ -1,0 +1,568 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Input Section ── */
+.inputSection {
+  background: linear-gradient(
+    168deg,
+    var(--bg) 0%,
+    color-mix(in srgb, #f59e0b 6%, var(--bg-secondary)) 40%,
+    var(--bg) 100%
+  );
+  border-radius: var(--radius-lg);
+  padding: 4px;
+}
+
+.inputHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.inputTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.inputTitleIcon {
+  font-size: 13px;
+  font-weight: 700;
+  color: #f59e0b;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* ── Color-coded Token ── */
+.colorToken {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 12px;
+  background: color-mix(in srgb, var(--bg-secondary) 80%, var(--bg));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+.tokenHeader {
+  color: #f472b6;
+}
+
+.tokenPayload {
+  color: #818cf8;
+}
+
+.tokenSignature {
+  color: #34d399;
+}
+
+.tokenDot {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+/* ── Textarea ── */
+.textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 14px;
+  font-size: 13px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  line-height: 1.6;
+  background: var(--bg-secondary);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  outline: none;
+  transition: border-color var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+}
+
+.textarea:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px color-mix(in srgb, #f59e0b 10%, transparent);
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.4;
+}
+
+.textareaError {
+  border-color: color-mix(in srgb, #ef4444 40%, var(--border));
+}
+
+.textareaValid {
+  border-color: color-mix(in srgb, #f59e0b 40%, var(--border));
+}
+
+/* ── Action Buttons ── */
+.actionGroup {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  user-select: none;
+}
+
+.actionBtn:hover:not(:disabled) {
+  border-color: #f59e0b;
+  color: #f59e0b;
+  background: color-mix(in srgb, #f59e0b 5%, var(--bg-secondary));
+  transform: translateY(-1px);
+}
+
+.actionBtn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.actionBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ── Validation Bar ── */
+.validationBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  animation: fadeIn 0.2s ease;
+}
+
+.validationSuccess {
+  background: color-mix(in srgb, #22c55e 10%, var(--bg-secondary));
+  color: #22c55e;
+  border: 1px solid color-mix(in srgb, #22c55e 20%, var(--border));
+}
+
+.validationError {
+  background: color-mix(in srgb, #ef4444 10%, var(--bg-secondary));
+  color: #ef4444;
+  border: 1px solid color-mix(in srgb, #ef4444 20%, var(--border));
+}
+
+.validationIcon {
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.validationText {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 12px;
+  word-break: break-word;
+}
+
+/* ── Algorithm Badge ── */
+.algBadge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: color-mix(in srgb, #f59e0b 8%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, #f59e0b 20%, var(--border));
+  border-radius: var(--radius-md);
+  animation: fadeInUp 0.3s ease both;
+}
+
+.algName {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f59e0b;
+  background: color-mix(in srgb, #f59e0b 12%, var(--bg));
+  padding: 4px 10px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.algDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ── Expiry Badge ── */
+.expiryBadge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 600;
+  animation: fadeInUp 0.3s ease both;
+  animation-delay: 0.05s;
+}
+
+.expiryValid {
+  background: color-mix(in srgb, #22c55e 10%, var(--bg-secondary));
+  color: #22c55e;
+  border: 1px solid color-mix(in srgb, #22c55e 20%, var(--border));
+}
+
+.expiryExpired {
+  background: color-mix(in srgb, #ef4444 10%, var(--bg-secondary));
+  color: #ef4444;
+  border: 1px solid color-mix(in srgb, #ef4444 20%, var(--border));
+}
+
+.expiryIcon {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.expiryText {
+  font-size: 13px;
+}
+
+/* ── Three Panel Layout ── */
+.panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.panels > .panel:last-child {
+  grid-column: 1 / -1;
+}
+
+.panel {
+  animation: fadeInUp 0.3s ease both;
+}
+
+.panel:nth-child(1) { animation-delay: 0.05s; }
+.panel:nth-child(2) { animation-delay: 0.1s; }
+.panel:nth-child(3) { animation-delay: 0.15s; }
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.panelDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.panelDotHeader {
+  background: #f472b6;
+}
+
+.panelDotPayload {
+  background: #818cf8;
+}
+
+.panelDotSignature {
+  background: #34d399;
+}
+
+/* ── Copy Button ── */
+.copyBtn {
+  padding: 5px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.copyBtn:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.copyBtnSuccess {
+  border-color: var(--success) !important;
+  color: var(--success) !important;
+  background: color-mix(in srgb, var(--success) 8%, var(--bg-secondary)) !important;
+}
+
+/* ── JSON Output ── */
+.jsonOutput {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  background: color-mix(in srgb, var(--bg-secondary) 80%, var(--bg));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  overflow-x: auto;
+  color: var(--text);
+  white-space: pre;
+  tab-size: 2;
+}
+
+/* ── Syntax Highlighting ── */
+.headerKey {
+  color: #f472b6;
+}
+
+.payloadKey {
+  color: #818cf8;
+}
+
+.jsonString {
+  color: #34d399;
+}
+
+.jsonNumber {
+  color: #f59e0b;
+}
+
+.jsonBoolean {
+  color: #f472b6;
+}
+
+.jsonNull {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* ── Signature Section ── */
+.signatureContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.signatureCode {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 14px;
+  background: color-mix(in srgb, var(--bg-secondary) 80%, var(--bg));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: #34d399;
+  word-break: break-all;
+  display: block;
+}
+
+.signatureNote {
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ── Claims Table ── */
+.claimsSection {
+  animation: fadeInUp 0.4s ease both;
+  animation-delay: 0.2s;
+}
+
+.claimsTable {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.claimRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  transition: background var(--transition-fast) ease;
+}
+
+.claimRow:hover {
+  background: color-mix(in srgb, #f59e0b 4%, var(--bg-secondary));
+}
+
+.claimKey {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+.claimIcon {
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.claimName {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #818cf8;
+}
+
+.claimLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  white-space: nowrap;
+}
+
+.claimValue {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.claimRaw {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.claimTimestamp {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.claimExpiry {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.claimExpiryValid {
+  background: color-mix(in srgb, #22c55e 15%, var(--bg));
+  color: #22c55e;
+}
+
+.claimExpiryExpired {
+  background: color-mix(in srgb, #ef4444 15%, var(--bg));
+  color: #ef4444;
+}
+
+/* ── Empty State ── */
+.emptyState {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--text-secondary);
+  animation: fadeIn 0.4s ease;
+}
+
+.emptyStateIcon {
+  font-size: 36px;
+  margin-bottom: 12px;
+  animation: emptyBounce 3s ease-in-out infinite;
+}
+
+.emptyStateText {
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.emptyStateHint {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.4;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .panels {
+    grid-template-columns: 1fr;
+  }
+
+  .panels > .panel:last-child {
+    grid-column: 1;
+  }
+
+  .inputHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .claimKey {
+    min-width: 120px;
+  }
+
+  .claimRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .algBadge {
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+}
+
+/* ── Keyframes ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes emptyBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
