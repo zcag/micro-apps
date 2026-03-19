@@ -1,0 +1,312 @@
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 4px 0 12px;
+  animation: fadeInDown 0.5s ease-out;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+/* Mode Card */
+.modeCard {
+  margin-bottom: 12px;
+  animation: fadeInUp 0.4s ease-out;
+}
+
+/* Input Card */
+.inputCard {
+  margin-bottom: 12px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.inputFields {
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.fadeIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeOut {
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text);
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2px;
+}
+
+.sectionIcon {
+  font-size: 1.1rem;
+}
+
+/* Textarea (for text & email body modes) */
+.textareaWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.textareaLabel {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  outline: none;
+}
+
+.textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+/* WiFi extras */
+.encryptionSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #7c3aed;
+}
+
+/* Customize Card */
+.customizeCard {
+  margin-bottom: 16px;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.customizeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.colorPicker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.colorLabel {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.colorInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+  transition: border-color var(--transition-fast);
+}
+
+.colorInputWrapper:hover {
+  border-color: var(--accent);
+}
+
+.colorInput {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+}
+
+.colorInput::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.colorInput::-webkit-color-swatch {
+  border: 2px solid var(--border);
+  border-radius: 6px;
+}
+
+.colorInput::-moz-color-swatch {
+  border: 2px solid var(--border);
+  border-radius: 6px;
+}
+
+.colorValue {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.ecSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* QR Preview */
+.previewSection {
+  margin-bottom: 20px;
+}
+
+.qrWrapper {
+  animation: fadeInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.qrCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px !important;
+  margin-bottom: 16px;
+}
+
+.qrImage {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Download Section */
+.downloadSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.downloadGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.svgButton {
+  width: 100%;
+  transition: all var(--transition-fast);
+}
+
+.downloadSuccess {
+  background: var(--success) !important;
+  transform: scale(1.02);
+}
+
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  text-align: center;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+.emptyText {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  70% { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .downloadGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .customizeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .qrImage {
+    max-width: 220px;
+  }
+}
