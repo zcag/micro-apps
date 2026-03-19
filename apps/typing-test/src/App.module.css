@@ -1,0 +1,353 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* ── Mode Selector ── */
+.modeSelector {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Stats Bar ── */
+.statsBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  padding: 8px 0;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.wpmStat {
+  padding: 0 16px;
+}
+
+.wpmValue {
+  font-size: 2.5rem;
+  font-weight: 200;
+  color: var(--accent);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  animation: fadeIn 0.3s ease;
+}
+
+.statLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+/* ── Passage Area ── */
+.passageArea {
+  position: relative;
+  cursor: text;
+  min-height: 120px;
+}
+
+.passageText {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 1.1rem;
+  line-height: 2;
+  letter-spacing: 0.3px;
+  user-select: none;
+}
+
+.hiddenInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 16px; /* prevent zoom on iOS */
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+/* ── Character States ── */
+.charPending {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.charCorrect {
+  color: #22c55e;
+}
+
+.charError {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 2px;
+  text-decoration: underline;
+  text-decoration-color: #ef4444;
+}
+
+.charCursor {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+  border-radius: 2px;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { background: color-mix(in srgb, var(--accent) 25%, transparent); }
+  50% { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+}
+
+/* ── Hint ── */
+.hint {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ── Controls ── */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ── Results ── */
+.results {
+  animation: fadeInUp 0.4s ease both;
+}
+
+.newBest {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #f59e0b;
+  margin-bottom: 8px;
+  animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.resultGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.resultItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.resultValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.resultLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+/* ── Best Display ── */
+.bestDisplay {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.bestDisplay strong {
+  color: var(--accent);
+}
+
+/* ── History ── */
+.historySection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.historyToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.historyTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.historyChevron {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.historyDate {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 80px;
+}
+
+.historyWpm {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-variant-numeric: tabular-nums;
+  flex: 1;
+}
+
+.historyAccuracy {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.historyTime {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ── Chart ── */
+.chart {
+  padding: 8px 0;
+}
+
+.chartLabel {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.chartBars {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 80px;
+}
+
+.chartBarWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+.chartBar {
+  width: 100%;
+  max-width: 32px;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: height var(--transition-normal) ease;
+}
+
+.chartBarLabel {
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .statsBar {
+    gap: 16px;
+  }
+
+  .statValue {
+    font-size: 1.2rem;
+  }
+
+  .wpmValue {
+    font-size: 2rem;
+  }
+
+  .passageText {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+
+  .resultGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resultValue {
+    font-size: 1.2rem;
+  }
+}

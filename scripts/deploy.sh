@@ -428,6 +428,14 @@ cat > "$DEPLOY_DIR/index.html" << 'LANDING_EOF'
       </div>
       <p>Calculate equated monthly installments with amortization schedules and comparison tools.</p>
     </a>
+    <!-- Wave 7 -->
+    <a class="card" href="./typing-test/" style="--accent:#8B5CF6">
+      <div class="card-header">
+        <span class="dot" style="background:#8B5CF6"></span>
+        <h2>Typing Speed Test</h2>
+      </div>
+      <p>Test your typing speed and accuracy with real-time WPM tracking and personal bests.</p>
+    </a>
   </div>
 
   <div class="footer">
