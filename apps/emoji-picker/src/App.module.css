@@ -1,0 +1,638 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== SEARCH BAR ===== */
+.searchWrap {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 14px 14px 14px 42px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card-bg);
+  color: var(--text);
+  font-size: 1rem;
+  outline: none;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.searchInput:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+
+.searchInput::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* ===== CATEGORY TABS ===== */
+.categoryTabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  position: sticky;
+  top: 56px;
+  z-index: 10;
+  background: var(--bg);
+  margin: 0 -4px;
+  padding: 4px;
+}
+
+.categoryTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  min-width: 52px;
+}
+
+.categoryTab:hover {
+  background: var(--bg-secondary);
+}
+
+.categoryTabActive {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.categoryTabActive:hover {
+  background: rgba(139, 92, 246, 0.15);
+}
+
+.categoryTabIcon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.categoryTabLabel {
+  font-size: 0.55rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.categoryTabActive .categoryTabLabel {
+  color: #8b5cf6;
+}
+
+.categoryTabCount {
+  font-size: 0.5rem;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+/* ===== VIEW TOGGLE & CONTROLS ===== */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.skinToneSelector {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.skinToneBtn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.skinToneBtn:hover {
+  transform: scale(1.15);
+}
+
+.skinToneBtnActive {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.viewToggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.viewBtn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.viewBtn:hover {
+  color: var(--text);
+}
+
+.viewBtnActive {
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===== FAVORITES & RECENT ===== */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.sectionLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.clearBtn {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all var(--transition-fast);
+}
+
+.clearBtn:hover {
+  color: var(--error);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+/* ===== EMOJI GRID ===== */
+.emojiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 4px;
+}
+
+.emojiCell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.6rem;
+  transition: all var(--transition-fast);
+  padding: 0;
+}
+
+.emojiCell:hover {
+  background: var(--bg-secondary);
+  transform: scale(1.2);
+  z-index: 2;
+}
+
+.emojiCell:active {
+  transform: scale(0.95);
+}
+
+.favBtn {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--card-bg);
+  cursor: pointer;
+  font-size: 0.55rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  padding: 0;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.emojiCell:hover .favBtn {
+  display: flex;
+}
+
+.favBtn:hover {
+  transform: scale(1.2);
+}
+
+/* ===== EMOJI LIST VIEW ===== */
+.emojiList {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.emojiListItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+  width: 100%;
+}
+
+.emojiListItem:hover {
+  background: var(--bg-secondary);
+}
+
+.emojiListItem:active {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+.emojiListEmoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  width: 40px;
+  text-align: center;
+}
+
+.emojiListInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.emojiListName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emojiListMeta {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emojiListFav {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  opacity: 0.4;
+  padding: 0;
+}
+
+.emojiListItem:hover .emojiListFav,
+.emojiListFav[data-active="true"] {
+  opacity: 1;
+}
+
+.emojiListFav:hover {
+  transform: scale(1.2);
+}
+
+/* ===== CATEGORY HEADING ===== */
+.categoryHeading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0 6px;
+}
+
+.categoryHeadingIcon {
+  font-size: 1.1rem;
+}
+
+.categoryHeadingText {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.categoryHeadingCount {
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  margin-left: auto;
+}
+
+/* ===== DETAIL PANEL ===== */
+.detailPanel {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: var(--shadow-md);
+}
+
+.detailTop {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.detailEmoji {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.detailInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.detailName {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.detailCodepoint {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.detailShortcode {
+  font-size: 0.75rem;
+  color: #8b5cf6;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.detailClose {
+  border: none;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.detailClose:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+/* ===== COPY FORMAT BUTTONS ===== */
+.copyFormats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.copyFormatBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.copyFormatBtn:hover {
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.04);
+}
+
+.copyFormatBtn:active {
+  transform: scale(0.97);
+}
+
+.copyFormatBtnCopied {
+  border-color: var(--success);
+  background: rgba(34, 197, 94, 0.06);
+}
+
+.copyFormatLabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.copyFormatValue {
+  font-size: 0.75rem;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  word-break: break-all;
+  text-align: left;
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 100;
+  animation: toastIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), toastOut 0.3s 1.2s ease-in forwards;
+  pointer-events: none;
+  box-shadow: var(--shadow-lg);
+}
+
+/* ===== EMPTY STATE ===== */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  opacity: 0.4;
+}
+
+.emptyText {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== KEYBOARD NAV ===== */
+.emojiCell:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 1px;
+}
+
+.emojiListItem:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: -1px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(10px) scale(0.95); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; }
+  to { opacity: 0; transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.emojiGrid .emojiCell {
+  animation: popIn 0.2s ease backwards;
+}
+
+/* Stagger grid children — first 50 */
+.emojiGrid .emojiCell:nth-child(1) { animation-delay: 0ms; }
+.emojiGrid .emojiCell:nth-child(2) { animation-delay: 8ms; }
+.emojiGrid .emojiCell:nth-child(3) { animation-delay: 16ms; }
+.emojiGrid .emojiCell:nth-child(4) { animation-delay: 24ms; }
+.emojiGrid .emojiCell:nth-child(5) { animation-delay: 32ms; }
+.emojiGrid .emojiCell:nth-child(6) { animation-delay: 40ms; }
+.emojiGrid .emojiCell:nth-child(7) { animation-delay: 48ms; }
+.emojiGrid .emojiCell:nth-child(8) { animation-delay: 56ms; }
+.emojiGrid .emojiCell:nth-child(9) { animation-delay: 64ms; }
+.emojiGrid .emojiCell:nth-child(10) { animation-delay: 72ms; }
+.emojiGrid .emojiCell:nth-child(n+11) { animation-delay: 80ms; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .emojiGrid {
+    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  }
+
+  .emojiCell {
+    font-size: 1.4rem;
+  }
+
+  .categoryTabs {
+    top: 48px;
+  }
+
+  .categoryTab {
+    padding: 5px 8px;
+    min-width: 44px;
+  }
+
+  .categoryTabIcon {
+    font-size: 1.1rem;
+  }
+
+  .categoryTabLabel {
+    font-size: 0.5rem;
+  }
+
+  .detailEmoji {
+    font-size: 2.8rem;
+  }
+
+  .copyFormats {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+
+  .skinToneBtn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.85rem;
+  }
+}
