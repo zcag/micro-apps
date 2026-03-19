@@ -1,8 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import {
   Layout,
   Card,
-  Input,
   Button,
   trackEvent,
 } from '@micro-apps/shared';
@@ -66,17 +65,33 @@ function formatGroupsText(groups: Group[]): string {
     .join('\n\n');
 }
 
+const PRESET_COUNTS = [2, 3, 4, 5, 6];
+const COLOR_COUNT = 8;
+
 export default function App() {
   const shared = decodeShareHash(window.location.hash);
 
   const [namesRaw, setNamesRaw] = useState(shared?.namesRaw ?? '');
-  const [groupCount, setGroupCount] = useState(shared?.groupCount?.toString() ?? '2');
+  const [groupCount, setGroupCount] = useState(shared?.groupCount ?? 2);
+  const [customCount, setCustomCount] = useState('');
+  const [isCustom, setIsCustom] = useState(false);
   const [groups, setGroups] = useState<Group[]>([]);
   const [warning, setWarning] = useState('');
   const [validation, setValidation] = useState('');
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState<'copy' | 'share' | null>(null);
   const [animKey, setAnimKey] = useState(0);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const parsedNames = useMemo(() => parseNames(namesRaw), [namesRaw]);
+
+  // Initialize custom state from shared link
+  useEffect(() => {
+    if (shared && !PRESET_COUNTS.includes(shared.groupCount)) {
+      setIsCustom(true);
+      setCustomCount(String(shared.groupCount));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Animate group cards on appear
   useEffect(() => {
@@ -91,7 +106,7 @@ export default function App() {
           setTimeout(() => {
             el.classList.remove(styles.groupCardEnter);
             el.classList.add(styles.groupCardVisible);
-          }, i * 80)
+          }, i * 100)
         );
       }
     });
@@ -108,7 +123,7 @@ export default function App() {
 
   function handleGenerate(rawOverride?: string, countOverride?: number) {
     const raw = rawOverride ?? namesRaw;
-    const count = countOverride ?? parseInt(groupCount);
+    const count = countOverride ?? groupCount;
 
     setWarning('');
     setValidation('');
@@ -146,52 +161,118 @@ export default function App() {
   const handleCopyAll = () => {
     if (groups.length === 0) return;
     navigator.clipboard.writeText(formatGroupsText(groups)).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setCopied('copy');
+      setTimeout(() => setCopied(null), 1500);
     }).catch(() => {});
   };
 
   const handleShareLink = () => {
-    const count = parseInt(groupCount);
-    if (isNaN(count)) return;
-    const url = window.location.origin + window.location.pathname + encodeShareHash(namesRaw, count);
+    if (isNaN(groupCount)) return;
+    const url = window.location.origin + window.location.pathname + encodeShareHash(namesRaw, groupCount);
     navigator.clipboard.writeText(url).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setCopied('share');
+      setTimeout(() => setCopied(null), 1500);
     }).catch(() => {});
+  };
+
+  const handleRemoveName = (index: number) => {
+    const names = parseNames(namesRaw);
+    names.splice(index, 1);
+    const separator = namesRaw.includes(',') ? ', ' : '\n';
+    setNamesRaw(names.join(separator));
+  };
+
+  const handleSelectCount = (count: number) => {
+    setIsCustom(false);
+    setGroupCount(count);
+    setCustomCount('');
+  };
+
+  const handleCustomCountChange = (val: string) => {
+    setCustomCount(val);
+    setIsCustom(true);
+    const num = parseInt(val);
+    if (!isNaN(num) && num >= 2) {
+      setGroupCount(num);
+    }
   };
 
   return (
     <Layout title="Random Group Maker">
       <div className={styles.container}>
         <Card>
+          {/* Names Input */}
           <div className={styles.section}>
-            <label className={styles.textareaLabel}>Names (one per line, or comma-separated)</label>
+            <div className={styles.textareaHeader}>
+              <label className={styles.textareaLabel}>Names</label>
+              {parsedNames.length > 0 && (
+                <span className={styles.nameBadge}>
+                  {parsedNames.length} {parsedNames.length === 1 ? 'name' : 'names'}
+                </span>
+              )}
+            </div>
             <textarea
               className={styles.textarea}
-              placeholder={'Alice\nBob\nCharlie\nDiana\nEve'}
+              placeholder={'Alice\nBob\nCharlie\nDiana\nEve\nFrank'}
               value={namesRaw}
               onChange={(e) => setNamesRaw(e.target.value)}
             />
+            {parsedNames.length > 0 && (
+              <div className={styles.nameChips}>
+                {parsedNames.map((name, i) => (
+                  <span key={`${name}-${i}`} className={styles.nameChip}>
+                    {name}
+                    <button
+                      className={styles.chipRemove}
+                      onClick={() => handleRemoveName(i)}
+                      aria-label={`Remove ${name}`}
+                    >
+                      &times;
+                    </button>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className={styles.inputRow}>
-            <Input
-              label="Number of Groups"
-              type="number"
-              inputMode="numeric"
-              min="2"
-              value={groupCount}
-              onChange={(e) => setGroupCount(e.target.value)}
-            />
+          {/* Group Count Selector */}
+          <div className={styles.groupCountSection}>
+            <label className={styles.groupCountLabel}>Number of Groups</label>
+            <div className={styles.groupCountPills}>
+              {PRESET_COUNTS.map((n) => (
+                <button
+                  key={n}
+                  className={`${styles.groupCountPill} ${!isCustom && groupCount === n ? styles.groupCountPillActive : ''}`}
+                  onClick={() => handleSelectCount(n)}
+                >
+                  {n}
+                </button>
+              ))}
+              <div className={styles.customCountWrapper}>
+                <input
+                  type="number"
+                  min="2"
+                  placeholder="..."
+                  className={`${styles.customCountInput} ${isCustom ? styles.customCountInputActive : ''}`}
+                  value={customCount}
+                  onChange={(e) => handleCustomCountChange(e.target.value)}
+                  onFocus={() => {
+                    if (!isCustom) {
+                      setIsCustom(true);
+                    }
+                  }}
+                  inputMode="numeric"
+                />
+              </div>
+            </div>
           </div>
 
           {validation && <div className={styles.validation}>{validation}</div>}
           {warning && <div className={styles.warning}>{warning}</div>}
 
           <div className={styles.buttons}>
-            <Button onClick={() => handleGenerate()} haptic>
-              Make Groups
+            <Button variant="gradient" onClick={() => handleGenerate()} haptic>
+              Shuffle & Make Groups
             </Button>
             {groups.length > 0 && (
               <Button variant="secondary" onClick={handleReshuffle} haptic>
@@ -201,6 +282,16 @@ export default function App() {
           </div>
         </Card>
 
+        {/* Empty State */}
+        {groups.length === 0 && parsedNames.length === 0 && (
+          <div className={styles.emptyState}>
+            <div className={styles.emptyIcon}>🎲</div>
+            <div className={styles.emptyTitle}>Ready to shuffle?</div>
+            <div className={styles.emptyHint}>Add names above and hit shuffle to create random groups</div>
+          </div>
+        )}
+
+        {/* Groups Display */}
         {groups.length > 0 && (
           <>
             <div className={styles.groupsGrid}>
@@ -208,29 +299,41 @@ export default function App() {
                 <div
                   key={`${animKey}-${i}`}
                   ref={(el) => { cardRefs.current[i] = el; }}
-                  className={styles.groupCard}
+                  className={`${styles.groupCard} ${styles[`groupColor${i % COLOR_COUNT}`]}`}
                 >
-                  <Card>
-                    <div className={styles.groupHeader}>Group {group.number}</div>
-                    {group.names.map((name, j) => (
-                      <div key={j} className={styles.groupName}>
-                        {name}
-                      </div>
-                    ))}
-                  </Card>
+                  <div className={styles.groupCardInner}>
+                    <div className={styles.groupHeader}>
+                      <span className={styles.groupBadge}>{group.number}</span>
+                      Group {group.number}
+                    </div>
+                    <div className={styles.groupBody}>
+                      {group.names.map((name, j) => (
+                        <div key={j} className={styles.groupName}>
+                          {name}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className={styles.copyBtn}>
-              <div className={styles.buttons}>
-                <Button variant="secondary" onClick={handleCopyAll}>
-                  {copied ? 'Copied!' : 'Copy All Results'}
-                </Button>
-                <Button variant="secondary" onClick={handleShareLink}>
-                  Share Link
-                </Button>
-              </div>
+            {/* Action Bar */}
+            <div className={styles.actionBar}>
+              <button
+                className={`${styles.actionBtn} ${copied === 'copy' ? styles.actionBtnSuccess : ''}`}
+                onClick={handleCopyAll}
+              >
+                <span className={styles.actionBtnIcon}>{copied === 'copy' ? '\u2713' : '\u2398'}</span>
+                {copied === 'copy' ? 'Copied!' : 'Copy Results'}
+              </button>
+              <button
+                className={`${styles.actionBtn} ${copied === 'share' ? styles.actionBtnSuccess : ''}`}
+                onClick={handleShareLink}
+              >
+                <span className={styles.actionBtnIcon}>{copied === 'share' ? '\u2713' : '\u{1F517}'}</span>
+                {copied === 'share' ? 'Link Copied!' : 'Share Link'}
+              </button>
             </div>
           </>
         )}
