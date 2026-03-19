@@ -1,0 +1,239 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+/* ── Calculator Section ── */
+.calcSection {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.calcLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.calcRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.calcRow > *:not(.calcOp) {
+  flex: 1;
+}
+
+.calcOp {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding-bottom: 12px;
+  flex-shrink: 0;
+}
+
+/* ── Quick Percent Picks ── */
+.quickPicks {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.quickBtn {
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.quickBtn:hover {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+.quickActive {
+  background: linear-gradient(135deg, #8b5cf6, #a855f7);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+/* ── Result Section ── */
+.resultSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.resultExpression {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.resultValue {
+  font-size: 2.4rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  animation: popIn 0.3s ease both;
+}
+
+.resultBar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.resultBarFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width var(--transition-normal) ease;
+  min-width: 2px;
+}
+
+.changeDirection {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.copyBtn {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.copyBtn:hover {
+  border-color: #8b5cf6;
+  color: #8b5cf6;
+}
+
+.copyBtn:active {
+  transform: scale(0.95);
+}
+
+/* ── History ── */
+.historySection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.historyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.historyTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--error);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.clearBtn:hover {
+  background: rgba(239, 68, 56, 0.1);
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.historyItem:last-child {
+  border-bottom: none;
+}
+
+.historyExpr {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.historyResult {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #8b5cf6;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* ── Animations ── */
+@keyframes popIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .calcRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calcOp {
+    text-align: center;
+    padding: 0;
+  }
+
+  .resultValue {
+    font-size: 2rem;
+  }
+
+  .quickPicks {
+    gap: 4px;
+  }
+
+  .quickBtn {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+  }
+}
