@@ -183,7 +183,7 @@ cat > "$DEPLOY_DIR/index.html" << 'LANDING_EOF'
   <div class="hero">
     <h1>Micro Apps</h1>
     <p>A collection of beautifully crafted, single-purpose utilities. Free, fast, and works on any device.</p>
-    <span class="count">30 apps and counting</span>
+    <span class="count">35 apps and counting</span>
   </div>
 
   <div class="grid">
@@ -436,6 +436,38 @@ cat > "$DEPLOY_DIR/index.html" << 'LANDING_EOF'
       </div>
       <p>Test your typing speed and accuracy with real-time WPM tracking and personal bests.</p>
     </a>
+
+    <a class="card" href="./base64-tool/" style="--accent:#06B6D4">
+      <div class="card-header">
+        <span class="dot" style="background:#06B6D4"></span>
+        <h2>Base64 Encoder/Decoder</h2>
+      </div>
+      <p>Encode and decode text and files to Base64 with real-time conversion and file support.</p>
+    </a>
+
+    <a class="card" href="./cron-gen/" style="--accent:#F59E0B">
+      <div class="card-header">
+        <span class="dot" style="background:#F59E0B"></span>
+        <h2>Cron Expression Generator</h2>
+      </div>
+      <p>Build and validate cron expressions with a visual editor and human-readable descriptions.</p>
+    </a>
+
+    <a class="card" href="./image-resize/" style="--accent:#10B981">
+      <div class="card-header">
+        <span class="dot" style="background:#10B981"></span>
+        <h2>Image Resizer</h2>
+      </div>
+      <p>Resize, crop, and convert images with preset dimensions and format options.</p>
+    </a>
+
+    <a class="card" href="./lorem-gen/" style="--accent:#E11D48">
+      <div class="card-header">
+        <span class="dot" style="background:#E11D48"></span>
+        <h2>Lorem Ipsum Generator</h2>
+      </div>
+      <p>Generate placeholder text in paragraphs, sentences, or words with copy support.</p>
+    </a>
   </div>
 
   <div class="footer">
@@ -465,7 +497,7 @@ git add -A
 if git diff --cached --quiet; then
   echo "No changes to deploy"
 else
-  git commit -m "Deploy wave 6: all 30 apps (from $CURRENT_SHA)"
+  git commit -m "Deploy wave 7: all 35 apps (from $CURRENT_SHA)"
   git push origin gh-pages
   echo "==> Deployed successfully!"
 fi
