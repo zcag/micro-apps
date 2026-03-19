@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Micro Apps</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+    }
+    h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    p.subtitle { color: #64748b; margin-bottom: 2.5rem; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 960px;
+      width: 100%;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .card h2 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+    .card p { color: #64748b; font-size: 0.9rem; line-height: 1.4; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Micro Apps</h1>
+  <p class="subtitle">A collection of handy single-purpose utilities</p>
+  <div class="grid">
+    <a class="card" href="./concrete-calc/">
+      <h2><span class="dot" style="background:#6B7280"></span>Concrete Calculator</h2>
+      <p>Calculate concrete volume in cubic yards, meters, and bags needed for your project.</p>
+    </a>
+    <a class="card" href="./pomodoro-adhd/">
+      <h2><span class="dot" style="background:#EF4444"></span>Pomodoro Timer</h2>
+      <p>ADHD-friendly Pomodoro timer with visual countdown and gentle audio cues.</p>
+    </a>
+    <a class="card" href="./group-maker/">
+      <h2><span class="dot" style="background:#8B5CF6"></span>Group Maker</h2>
+      <p>Randomly split a list of names into balanced groups instantly.</p>
+    </a>
+    <a class="card" href="./tile-calc/">
+      <h2><span class="dot" style="background:#3B82F6"></span>Tile Calculator</h2>
+      <p>Calculate tile square footage, number of tiles needed, and cost estimates.</p>
+    </a>
+    <a class="card" href="./word-counter/">
+      <h2><span class="dot" style="background:#10B981"></span>Word Counter</h2>
+      <p>Real-time word, character, and sentence counter with keyword density analysis.</p>
+    </a>
+  </div>
+</body>
+</html>
