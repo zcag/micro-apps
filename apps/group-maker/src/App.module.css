@@ -1,0 +1,118 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.section {
+  margin-bottom: 16px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.textareaLabel {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.inputRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.inputRow > * {
+  flex: 1;
+}
+
+.buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.buttons > * {
+  flex: 1;
+}
+
+.warning {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: var(--warning);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.validation {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: var(--error);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.groupsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.groupCard {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.groupCardEnter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.groupCardVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.groupHeader {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.groupName {
+  font-size: 14px;
+  color: var(--text);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.groupName:last-child {
+  border-bottom: none;
+}
+
+.copyBtn {
+  margin-top: 12px;
+}
