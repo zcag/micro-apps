@@ -1,1 +1,0 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/tile-calc/sw.js', { scope: '/micro-apps/tile-calc/' })})}

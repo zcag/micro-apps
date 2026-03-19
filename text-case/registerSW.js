@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/text-case/sw.js', { scope: '/micro-apps/text-case/' })})}

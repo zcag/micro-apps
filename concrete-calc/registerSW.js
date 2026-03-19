@@ -1,1 +1,0 @@
-if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/concrete-calc/sw.js', { scope: '/micro-apps/concrete-calc/' })})}
