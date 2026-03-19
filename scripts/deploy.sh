@@ -183,7 +183,7 @@ cat > "$DEPLOY_DIR/index.html" << 'LANDING_EOF'
   <div class="hero">
     <h1>Micro Apps</h1>
     <p>A collection of beautifully crafted, single-purpose utilities. Free, fast, and works on any device.</p>
-    <span class="count">40 apps and counting</span>
+    <span class="count">45 apps and counting</span>
   </div>
 
   <div class="grid">
@@ -508,6 +508,46 @@ cat > "$DEPLOY_DIR/index.html" << 'LANDING_EOF'
       </div>
       <p>Check color contrast ratios for WCAG accessibility compliance with live preview.</p>
     </a>
+    <!-- Wave 9 -->
+    <a class="card" href="./jwt-decoder/" style="--accent:#DC2626">
+      <div class="card-header">
+        <span class="dot" style="background:#DC2626"></span>
+        <h2>JWT Decoder</h2>
+      </div>
+      <p>Decode and inspect JSON Web Tokens with header, payload, and signature analysis.</p>
+    </a>
+
+    <a class="card" href="./box-shadow/" style="--accent:#8B5CF6">
+      <div class="card-header">
+        <span class="dot" style="background:#8B5CF6"></span>
+        <h2>Box Shadow Generator</h2>
+      </div>
+      <p>Create CSS box shadows visually with layered shadows, presets, and live preview.</p>
+    </a>
+
+    <a class="card" href="./meta-tags/" style="--accent:#0891B2">
+      <div class="card-header">
+        <span class="dot" style="background:#0891B2"></span>
+        <h2>Meta Tag Generator</h2>
+      </div>
+      <p>Generate SEO meta tags, Open Graph, and Twitter Card tags with live preview.</p>
+    </a>
+
+    <a class="card" href="./emoji-picker/" style="--accent:#F59E0B">
+      <div class="card-header">
+        <span class="dot" style="background:#F59E0B"></span>
+        <h2>Emoji Picker &amp; Search</h2>
+      </div>
+      <p>Search and browse emojis by category with one-click copy and skin tone support.</p>
+    </a>
+
+    <a class="card" href="./base-convert/" style="--accent:#059669">
+      <div class="card-header">
+        <span class="dot" style="background:#059669"></span>
+        <h2>Number Base Converter</h2>
+      </div>
+      <p>Convert numbers between binary, octal, decimal, hexadecimal, and custom bases.</p>
+    </a>
   </div>
 
   <div class="footer">
@@ -537,7 +577,7 @@ git add -A
 if git diff --cached --quiet; then
   echo "No changes to deploy"
 else
-  git commit -m "Deploy wave 8: all 40 apps (from $CURRENT_SHA)"
+  git commit -m "Deploy wave 9: all 45 apps (from $CURRENT_SHA)"
   git push origin gh-pages
   echo "==> Deployed successfully!"
 fi
