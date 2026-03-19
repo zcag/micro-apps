@@ -1,0 +1,525 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* ── Mode Bar ── */
+.modeBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Options Bar ── */
+.optionsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.optionsLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ── Toggle Switch ── */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  transition: background var(--transition-fast) ease;
+}
+
+.toggleSlider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--transition-fast) ease;
+}
+
+.toggle input:checked + .toggleSlider {
+  background: #0ea5e9;
+}
+
+.toggle input:checked + .toggleSlider::after {
+  transform: translateX(16px);
+}
+
+.toggleLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── Secret Key ── */
+.secretKeyBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: color-mix(in srgb, #8b5cf6 8%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, #8b5cf6 20%, var(--border));
+  border-radius: var(--radius-md);
+  animation: fadeIn 0.3s ease;
+}
+
+.secretKeyLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: #8b5cf6;
+  white-space: nowrap;
+}
+
+.secretKeyInput {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--transition-fast) ease;
+}
+
+.secretKeyInput:focus {
+  border-color: #8b5cf6;
+}
+
+.secretKeyInput::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ── Input Panel ── */
+.inputPanel {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #0ea5e9 20%, var(--border));
+  background: var(--bg-secondary);
+  transition: border-color var(--transition-fast) ease;
+}
+
+.inputPanel:focus-within {
+  border-color: color-mix(in srgb, #0ea5e9 50%, var(--border));
+}
+
+/* ── Panel Header ── */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 60%, var(--bg));
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.panelTitle::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0ea5e9;
+}
+
+.charCount {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Textarea ── */
+.textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ── Drop Zone ── */
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 140px;
+  padding: 32px 16px;
+  cursor: pointer;
+  border: 2px dashed color-mix(in srgb, #0ea5e9 30%, var(--border));
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  margin: -1px;
+  transition: all var(--transition-fast) ease;
+  background: transparent;
+}
+
+.dropZone:hover,
+.dropZoneActive {
+  border-color: #0ea5e9;
+  background: color-mix(in srgb, #0ea5e9 6%, transparent);
+}
+
+.dropZoneActive {
+  border-style: solid;
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.dropIcon {
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.dropText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dropHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.fileIcon {
+  font-size: 1.5rem;
+}
+
+.fileDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+.fileSizeLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* ── Compare Hash ── */
+.compareBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.compareLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.compareInput {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--transition-fast) ease;
+}
+
+.compareInput:focus {
+  border-color: #0ea5e9;
+}
+
+.compareInput::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ── Computing ── */
+.computing {
+  text-align: center;
+  padding: 8px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ── Hash Results ── */
+.results {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, #10b981 20%, var(--border));
+  background: var(--bg-secondary);
+  animation: fadeIn 0.3s ease;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 60%, var(--bg));
+}
+
+.resultsTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.resultsTitle::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* ── Copy All Button ── */
+.copyAllBtn {
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.copyAllBtn:hover {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.copyAllBtnSuccess {
+  border-color: #10b981;
+  background: color-mix(in srgb, #10b981 12%, var(--bg));
+  color: #10b981;
+}
+
+/* ── Hash List ── */
+.hashList {
+  display: flex;
+  flex-direction: column;
+}
+
+.hashRow {
+  padding: 12px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.hashRow:last-child {
+  border-bottom: none;
+}
+
+.hashRow:hover {
+  background: color-mix(in srgb, #0ea5e9 6%, transparent);
+}
+
+.hashMatch {
+  background: color-mix(in srgb, #10b981 8%, transparent);
+  border-left: 3px solid #10b981;
+}
+
+.hashMatch:hover {
+  background: color-mix(in srgb, #10b981 14%, transparent);
+}
+
+.hashMismatch {
+  border-left: 3px solid transparent;
+}
+
+.hashHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.hashAlgo {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.hashActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.matchBadge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+  padding: 1px 8px;
+  border-radius: 99px;
+  background: color-mix(in srgb, #10b981 12%, transparent);
+}
+
+.mismatchBadge {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 1px 8px;
+  border-radius: 99px;
+  background: color-mix(in srgb, var(--text-secondary) 8%, transparent);
+  opacity: 0.6;
+}
+
+.copyHint {
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: opacity var(--transition-fast) ease;
+}
+
+.hashRow:hover .copyHint {
+  opacity: 1;
+}
+
+/* ── Hash Value ── */
+.hashValue {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  word-break: break-all;
+  user-select: all;
+}
+
+/* ── Footer ── */
+.footer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  padding: 8px 0;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .optionsBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .compareBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .secretKeyBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .textarea {
+    font-size: 12px;
+    min-height: 100px;
+  }
+
+  .hashValue {
+    font-size: 11px;
+  }
+}
