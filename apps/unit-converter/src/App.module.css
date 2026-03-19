@@ -1,0 +1,298 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ---- Category scroll ---- */
+.categoryScroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.categoryScroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---- Converter card ---- */
+.converterCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 20px !important;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fieldLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.valueInput {
+  flex: 1;
+  padding: 12px 14px;
+  font-size: 22px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  min-width: 0;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -moz-appearance: textfield;
+}
+
+.valueInput::-webkit-outer-spin-button,
+.valueInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.valueInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.resultInput {
+  color: var(--accent);
+  font-weight: 700;
+  cursor: default;
+}
+
+.unitSelect {
+  width: 90px;
+  padding: 12px 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2386868b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.unitSelect:focus {
+  border-color: var(--accent);
+}
+
+/* ---- Swap button ---- */
+.swapRow {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.swapButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--accent);
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.swapButton:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+.swapButton:active {
+  transform: rotate(180deg) scale(0.9);
+}
+
+/* ---- Formula ---- */
+.formula {
+  margin-top: 12px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  border-left: 3px solid var(--accent);
+}
+
+/* ---- Action buttons ---- */
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.actionBtn {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.actionBtn:active {
+  transform: scale(0.97);
+}
+
+.actionBtnCopied {
+  color: var(--success) !important;
+  border-color: var(--success) !important;
+}
+
+.actionBtnFav {
+  color: #f59e0b !important;
+  border-color: #f59e0b !important;
+}
+
+/* ---- Sections ---- */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.sectionToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 100%;
+}
+
+.toggleArrow {
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
+}
+
+/* ---- Chips (favorites) ---- */
+.chipList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chip:active {
+  transform: scale(0.95);
+}
+
+.chipActive {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.chipActive:hover {
+  color: #fff;
+}
+
+/* ---- Recents list ---- */
+.recentsList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.recentItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  text-align: left;
+}
+
+.recentItem:hover {
+  border-color: var(--accent);
+}
+
+.recentValues {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.recentCategory {
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.emptyText {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 12px 0;
+}
