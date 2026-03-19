@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#g)"/>
+  <text x="256" y="192" text-anchor="middle" font-size="80" font-weight="700" fill="#fff" font-family="system-ui">EMI</text>
+  <rect x="128" y="224" width="256" height="4" rx="2" fill="#fff" opacity="0.4"/>
+  <text x="256" y="312" text-anchor="middle" font-size="48" font-weight="600" fill="#fff" opacity="0.9" font-family="system-ui">CALC</text>
+  <rect x="148" y="344" width="216" height="40" rx="20" fill="#fff" opacity="0.2"/>
+  <rect x="160" y="354" width="128" height="20" rx="10" fill="#a5b4fc"/>
+</svg>

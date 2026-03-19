@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#g)"/>
+  <text x="96" y="82" text-anchor="middle" font-size="28" font-weight="700" fill="#fff" font-family="system-ui">EMI</text>
+  <text x="96" y="118" text-anchor="middle" font-size="16" font-weight="600" fill="#fff" opacity="0.9" font-family="system-ui">CALC</text>
+</svg>
