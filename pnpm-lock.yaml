@@ -21,7 +21,7 @@ importers:
         specifier: ^5.5.0
         version: 5.9.3
 
-  apps/test-app:
+  apps/concrete-calc:
     dependencies:
       '@micro-apps/shared':
         specifier: workspace:*
