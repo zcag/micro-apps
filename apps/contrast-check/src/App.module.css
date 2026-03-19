@@ -1,0 +1,840 @@
+.main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ─── Tabs ─────────────────────────────────────────── */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 4px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.tab:hover {
+  background: var(--card-bg);
+}
+
+.tabActive {
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── Preview ──────────────────────────────────────── */
+.preview {
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+  transition: all var(--transition-normal) ease;
+  animation: fadeInScale 0.3s ease both;
+}
+
+.previewLarge {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+
+.previewNormal {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.previewButtons {
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+  align-items: center;
+}
+
+.previewButton {
+  padding: 6px 16px;
+  border: 2px solid;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.previewLink {
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ─── Ratio Display ────────────────────────────────── */
+.ratioSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.ratioDisplay {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.ratioValue {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.ratioSeparator {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+/* ─── Ratio Scale ──────────────────────────────────── */
+.ratioScale {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ratioBar {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  position: relative;
+  overflow: visible;
+}
+
+.ratioFill {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #EF4444 0%, #F59E0B 20%, #22C55E 40%, #6366F1 100%);
+  transition: width var(--transition-normal) ease;
+}
+
+.ratioMarker {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 14px;
+  background: var(--text-secondary);
+  border-radius: 1px;
+  opacity: 0.4;
+  transform: translateX(-50%);
+}
+
+.ratioLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+/* ─── WCAG Results ─────────────────────────────────── */
+.wcagGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.wcagResult {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border);
+  transition: all var(--transition-fast) ease;
+}
+
+.wcagIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.pass {
+  border-color: #22C55E;
+  background: rgba(34, 197, 94, 0.06);
+}
+
+.pass .wcagIcon {
+  background: #22C55E;
+  color: #fff;
+}
+
+.fail {
+  border-color: #EF4444;
+  background: rgba(239, 68, 68, 0.06);
+}
+
+.fail .wcagIcon {
+  background: #EF4444;
+  color: #fff;
+}
+
+.wcagInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.wcagLevel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.wcagReq {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ─── Copy Button ──────────────────────────────────── */
+.copyBtn {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.copyBtn:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.copyBtnDone {
+  background: #22C55E !important;
+  border-color: #22C55E !important;
+  color: #fff !important;
+}
+
+/* ─── Color Inputs ─────────────────────────────────── */
+.colorInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.colorInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.colorInputHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.colorLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.swatchRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorSwatch {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: background var(--transition-fast) ease;
+}
+
+.hexDisplay {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: var(--text);
+}
+
+.inputModes {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+
+.modeBtn {
+  flex: 1;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.modeBtn:hover {
+  color: var(--text);
+}
+
+.modeBtnActive {
+  background: var(--card-bg);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+.hexInput {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-weight: 600;
+  outline: none;
+  transition: border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.hexInput:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* ─── Sliders ──────────────────────────────────────── */
+.sliderGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sliderLabel {
+  width: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-secondary);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--slider-color, var(--accent));
+  border: 3px solid var(--card-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+  transition: transform var(--transition-fast) ease;
+}
+
+.slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.15);
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--slider-color, var(--accent));
+  border: 3px solid var(--card-bg);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  cursor: grab;
+}
+
+.hueSlider {
+  background: linear-gradient(to right,
+    hsl(0,100%,50%), hsl(60,100%,50%), hsl(120,100%,50%),
+    hsl(180,100%,50%), hsl(240,100%,50%), hsl(300,100%,50%), hsl(360,100%,50%)
+  );
+}
+
+.hueSlider::-webkit-slider-thumb {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.hueSlider::-moz-range-thumb {
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.numInput {
+  width: 52px;
+  padding: 6px 8px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  text-align: center;
+  outline: none;
+  transition: border-color var(--transition-fast) ease;
+  -moz-appearance: textfield;
+}
+
+.numInput::-webkit-inner-spin-button,
+.numInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.numInput:focus {
+  border-color: var(--accent);
+}
+
+/* ─── Native Picker ────────────────────────────────── */
+.pickerWrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nativePicker {
+  width: 56px;
+  height: 44px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 2px;
+  background: var(--bg);
+}
+
+.pickerHint {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ─── Swap Button ──────────────────────────────────── */
+.swapBtn {
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast) ease;
+  flex-shrink: 0;
+}
+
+.swapBtn:hover {
+  background: var(--bg-secondary);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: rotate(180deg);
+}
+
+/* ─── Suggestions ──────────────────────────────────── */
+.suggestSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sectionTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.suggestDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.suggestRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.suggestLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.suggestColor {
+  height: 42px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.suggestColor:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Color Blindness ─────────────────────────────── */
+.blindSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.blindDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.blindCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeInUp 0.3s ease both;
+}
+
+.blindCard:nth-child(3) { animation-delay: 60ms; }
+.blindCard:nth-child(4) { animation-delay: 120ms; }
+.blindCard:nth-child(5) { animation-delay: 180ms; }
+
+.blindLabel {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.blindLabelDesc {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.blindPreview {
+  border-radius: var(--radius-md);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--border);
+  transition: all var(--transition-normal) ease;
+}
+
+.blindTextLarge {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.blindTextNormal {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.blindMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blindRatio {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.blindPass {
+  color: #22C55E;
+}
+
+.blindFail {
+  color: #EF4444;
+}
+
+.blindColors {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* ─── Palette Section ──────────────────────────────── */
+.paletteSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.paletteDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.paletteTextarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color var(--transition-fast) ease;
+}
+
+.paletteTextarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* ─── Matrix ───────────────────────────────────────── */
+.matrixSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.matrixScroll {
+  overflow-x: auto;
+  margin: 0 -4px;
+  padding: 0 4px;
+}
+
+.matrix {
+  border-collapse: separate;
+  border-spacing: 4px;
+  width: 100%;
+  min-width: fit-content;
+}
+
+.matrixCorner {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-align: left;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.matrixHeader,
+.matrixRowHeader {
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.matrixHeaderSwatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  margin: 0 auto 4px;
+}
+
+.matrixRowHeader .matrixHeaderSwatch {
+  margin: 0 4px 0 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.matrixRowHeader {
+  text-align: left;
+  white-space: nowrap;
+}
+
+.matrixHeaderHex {
+  font-size: 10px;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  color: var(--text-secondary);
+}
+
+.matrixSelf {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+}
+
+.matrixCell {
+  padding: 6px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  min-width: 72px;
+}
+
+.matrixCell:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
+}
+
+.matrixPass { background: rgba(34, 197, 94, 0.06); border: 1px solid rgba(34, 197, 94, 0.2); }
+.matrixWarn { background: rgba(245, 158, 11, 0.06); border: 1px solid rgba(245, 158, 11, 0.2); }
+.matrixFail { background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+.matrixCellPreview {
+  width: 100%;
+  height: 28px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.matrixRatio {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  display: block;
+}
+
+.matrixBadge {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  display: inline-block;
+  margin-top: 2px;
+}
+
+.matrixBadgePass { background: #22C55E; color: #fff; }
+.matrixBadgeWarn { background: #F59E0B; color: #fff; }
+.matrixBadgeFail { background: #EF4444; color: #fff; }
+
+.matrixHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-style: italic;
+}
+
+/* ─── Animations ───────────────────────────────────── */
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: scale(0.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Responsive ───────────────────────────────────── */
+@media (max-width: 600px) {
+  .main {
+    padding: 12px;
+  }
+
+  .preview {
+    padding: 24px 16px;
+  }
+
+  .previewLarge {
+    font-size: 20px;
+  }
+
+  .ratioValue {
+    font-size: 36px;
+  }
+
+  .ratioSeparator {
+    font-size: 28px;
+  }
+
+  .wcagGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .matrixCell {
+    min-width: 64px;
+  }
+}
