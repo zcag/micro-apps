@@ -21,10 +21,9 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     backgroundColor: 'var(--bg-secondary)',
-    borderRadius: '8px',
+    borderRadius: 'var(--radius-sm)',
     border: '1px solid var(--border)',
     overflow: 'hidden',
-    transition: 'border-color 0.2s ease',
   },
   input: {
     flex: 1,
@@ -47,9 +46,9 @@ const styles = {
 export function Input({ label, suffix, containerStyle, ...props }: InputProps) {
   return (
     <div style={{ ...styles.container, ...containerStyle }}>
-      <label style={styles.label}>{label}</label>
-      <div style={styles.inputWrapper}>
-        <input style={styles.input} {...props} />
+      <label className="shared-input-label" style={styles.label}>{label}</label>
+      <div className="shared-input-wrapper" style={styles.inputWrapper}>
+        <input className="shared-input-field" style={styles.input} {...props} />
         {suffix && <span style={styles.suffix}>{suffix}</span>}
       </div>
     </div>

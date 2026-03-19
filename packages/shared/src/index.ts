@@ -1,3 +1,7 @@
+// Styles (auto-imported by all apps)
+import './animations.css';
+import './components/components.css';
+
 // Theme
 export { ThemeProvider, useTheme } from './theme';
 export { lightTheme, darkTheme } from './theme';

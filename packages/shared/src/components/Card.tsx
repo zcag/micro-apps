@@ -3,17 +3,36 @@ import React from 'react';
 interface CardProps {
   children: React.ReactNode;
   style?: React.CSSProperties;
+  variant?: 'default' | 'glass';
+  className?: string;
+  hoverable?: boolean;
 }
 
 const baseStyle: React.CSSProperties = {
   backgroundColor: 'var(--card-bg)',
-  borderRadius: '12px',
+  borderRadius: 'var(--radius-md)',
   padding: '16px',
-  boxShadow: '0 1px 3px var(--shadow)',
+  boxShadow: 'var(--shadow-sm)',
   border: '1px solid var(--border)',
-  transition: 'background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease',
 };
 
-export function Card({ children, style }: CardProps) {
-  return <div style={{ ...baseStyle, ...style }}>{children}</div>;
+export function Card({ children, style, variant = 'default', className = '', hoverable = true }: CardProps) {
+  const classes = [
+    'shared-card',
+    variant === 'glass' ? 'shared-card--glass' : '',
+    className,
+  ].filter(Boolean).join(' ');
+
+  return (
+    <div
+      className={classes}
+      style={{
+        ...baseStyle,
+        ...(hoverable ? {} : { transform: 'none' }),
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
 }

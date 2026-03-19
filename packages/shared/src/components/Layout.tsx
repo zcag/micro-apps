@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../theme';
 
 interface LayoutProps {
@@ -20,13 +20,10 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '12px 20px',
-    borderBottom: '1px solid var(--border)',
     backgroundColor: 'var(--bg)',
     position: 'sticky' as const,
     top: 0,
     zIndex: 100,
-    backdropFilter: 'blur(10px)',
-    transition: 'background-color 0.2s ease, border-color 0.2s ease',
   },
   title: {
     fontSize: '18px',
@@ -37,7 +34,7 @@ const styles = {
   themeButton: {
     background: 'none',
     border: '1px solid var(--border)',
-    borderRadius: '8px',
+    borderRadius: 'var(--radius-sm)',
     padding: '6px 12px',
     cursor: 'pointer',
     fontSize: '16px',
@@ -59,10 +56,22 @@ const styles = {
 
 export function Layout({ title, children }: LayoutProps) {
   const { isDark, toggleTheme } = useTheme();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 8);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div style={styles.wrapper}>
-      <header style={styles.header}>
+      <header
+        className={`shared-header${scrolled ? ' shared-header--scrolled' : ''}`}
+        style={styles.header}
+      >
         <h1 style={styles.title}>{title}</h1>
         <button
           style={styles.themeButton}

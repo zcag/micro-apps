@@ -1,0 +1,186 @@
+/* ================================================
+   Shared Component Styles — interactive states
+   ================================================ */
+
+/* --- Card --- */
+.shared-card {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+              border-color 0.25s ease,
+              background-color 0.2s ease;
+}
+
+.shared-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.shared-card--glass {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .shared-card--glass {
+  background-color: rgba(28, 28, 30, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --- Button --- */
+.shared-btn {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.2s ease,
+              background-color 0.2s ease,
+              opacity 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.shared-btn:active {
+  transform: scale(0.97);
+}
+
+.shared-btn--primary:active {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.shared-btn--gradient {
+  background: var(--gradient-primary) !important;
+  border: none;
+  color: #fff;
+}
+
+.shared-btn--gradient:hover {
+  filter: brightness(1.1);
+}
+
+.shared-btn--shimmer {
+  background: var(--gradient-primary) !important;
+  border: none;
+  color: #fff;
+}
+
+.shared-btn--shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.2) 37%,
+    transparent 63%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* --- Input --- */
+.shared-input-wrapper {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.shared-input-wrapper:focus-within {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
+}
+
+[data-theme="dark"] .shared-input-wrapper:focus-within {
+  box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2);
+}
+
+/* Floating label */
+.shared-input-field::placeholder {
+  transition: opacity 0.2s ease;
+}
+
+.shared-input-field:focus::placeholder {
+  opacity: 0.4;
+}
+
+.shared-input-label {
+  transition: transform 0.2s ease, font-size 0.2s ease, color 0.2s ease;
+}
+
+/* --- Layout header --- */
+.shared-header {
+  transition: background-color 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.25s ease;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--accent),
+    transparent
+  );
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.shared-header--scrolled {
+  box-shadow: var(--shadow-md);
+}
+
+/* --- ResultDisplay --- */
+.shared-result {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.2s ease;
+}
+
+.shared-result::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--gradient-primary);
+  border-radius: 0 2px 2px 0;
+}
+
+.shared-result--pulse {
+  animation: resultPulse 0.4s ease-out;
+}
+
+@keyframes resultPulse {
+  0% { background-color: var(--bg-secondary); }
+  40% { background-color: rgba(0, 113, 227, 0.08); }
+  100% { background-color: var(--bg-secondary); }
+}
+
+[data-theme="dark"] .shared-result--pulse {
+  animation: resultPulseDark 0.4s ease-out;
+}
+
+@keyframes resultPulseDark {
+  0% { background-color: var(--bg-secondary); }
+  40% { background-color: rgba(10, 132, 255, 0.08); }
+  100% { background-color: var(--bg-secondary); }
+}
+
+/* Copy button animation */
+.shared-copy-btn {
+  transition: background-color 0.2s ease,
+              color 0.2s ease,
+              transform 0.15s ease;
+}
+
+.shared-copy-btn:active {
+  transform: scale(0.93);
+}
+
+.shared-copy-btn--copied {
+  color: var(--success) !important;
+  border-color: var(--success) !important;
+}
