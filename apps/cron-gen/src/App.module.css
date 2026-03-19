@@ -1,0 +1,524 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+/* ── Output Card ── */
+.outputCard {
+  padding: 24px !important;
+  text-align: center;
+}
+
+.expressionRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.expressionParts {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.expressionPart {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  transition: color var(--transition-fast) ease;
+}
+
+.expressionActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.description {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.fieldLegend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Copy Button ── */
+.copyBtn {
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  white-space: nowrap;
+}
+
+.copyBtn:hover {
+  border-color: #7c3aed;
+  color: #7c3aed;
+}
+
+.copyBtnSuccess {
+  border-color: #10b981;
+  background: color-mix(in srgb, #10b981 12%, var(--bg));
+  color: #10b981;
+}
+
+/* ── Format Bar ── */
+.formatBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Reverse Section ── */
+.reverseSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reverseInputRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.reverseInput {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--transition-fast) ease, box-shadow var(--transition-fast) ease;
+}
+
+.reverseInput:focus {
+  border-color: color-mix(in srgb, #7c3aed 50%, var(--border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, #7c3aed 12%, transparent);
+}
+
+.reverseInput::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.parseError {
+  padding: 8px 14px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--error) 10%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, var(--error) 30%, var(--border));
+  color: var(--error);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ── Presets Section ── */
+.presetsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.presetGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+}
+
+.presetBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  text-align: left;
+}
+
+.presetBtn:hover {
+  border-color: color-mix(in srgb, #7c3aed 40%, var(--border));
+  background: color-mix(in srgb, #7c3aed 6%, var(--bg-secondary));
+  transform: translateY(-1px);
+}
+
+.presetLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.presetExpr {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* ── Fields Section ── */
+.fieldsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fieldsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Field Card ── */
+.fieldCard {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  overflow: hidden;
+  transition: border-color var(--transition-fast) ease;
+}
+
+.fieldHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 60%, var(--bg));
+}
+
+.fieldDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.fieldLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.fieldExpr {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ── Field Type Bar ── */
+.fieldTypeBar {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px;
+  flex-wrap: wrap;
+}
+
+.fieldTypeBtn {
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.fieldTypeBtn:hover {
+  background: color-mix(in srgb, var(--text-secondary) 8%, transparent);
+}
+
+.fieldTypeBtnActive {
+  font-weight: 600;
+}
+
+/* ── Specific Grid ── */
+.specificGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 16px 14px;
+}
+
+.specificBtn {
+  width: 40px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.specificBtn:hover {
+  border-color: var(--text-secondary);
+}
+
+.specificBtnActive {
+  border-color: transparent;
+  font-weight: 600;
+}
+
+/* ── Range Row ── */
+.rangeRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 14px;
+  flex-wrap: wrap;
+}
+
+.rangeLabel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.rangeSelect {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.rangeSelect:focus {
+  border-color: var(--accent);
+}
+
+.rangeSeparator {
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-top: 16px;
+}
+
+/* ── Interval Row ── */
+.intervalRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 14px;
+}
+
+.intervalPrefix,
+.intervalSuffix {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.intervalInput {
+  width: 70px;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  text-align: center;
+  outline: none;
+}
+
+.intervalInput:focus {
+  border-color: var(--accent);
+}
+
+/* Remove number spinner */
+.intervalInput::-webkit-outer-spin-button,
+.intervalInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.intervalInput[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* ── Runs Section ── */
+.runsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.runsCard {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.runsList {
+  display: flex;
+  flex-direction: column;
+}
+
+.runItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  transition: background var(--transition-fast) ease;
+}
+
+.runItem:last-child {
+  border-bottom: none;
+}
+
+.runItem:hover {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.runIndex {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, #7c3aed 12%, var(--bg-secondary));
+  color: #7c3aed;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.runDate {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.runTime {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.noRuns {
+  padding: 32px 16px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .expressionPart {
+    font-size: 20px;
+  }
+
+  .presetGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .specificBtn {
+    width: 36px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .reverseInputRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fieldLegend {
+    gap: 8px;
+  }
+
+  .legendLabel {
+    font-size: 10px;
+  }
+}
