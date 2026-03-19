@@ -1,0 +1,366 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* ── Mode Bar ── */
+.modeBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ── Options Bar ── */
+.optionsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.optionsRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Toggle Switch ── */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  transition: background var(--transition-fast) ease;
+}
+
+.toggleSlider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--transition-fast) ease;
+}
+
+.toggle input:checked + .toggleSlider {
+  background: #0ea5e9;
+}
+
+.toggle input:checked + .toggleSlider::after {
+  transform: translateX(16px);
+}
+
+.toggleLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── Auto-Detect Banner ── */
+.autoDetect {
+  padding: 8px 16px;
+  background: color-mix(in srgb, #f59e0b 12%, var(--bg-secondary));
+  border: 1px solid color-mix(in srgb, #f59e0b 30%, var(--border));
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+  color: #f59e0b;
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast) ease;
+  animation: fadeIn 0.3s ease;
+}
+
+.autoDetect:hover {
+  background: color-mix(in srgb, #f59e0b 18%, var(--bg-secondary));
+}
+
+/* ── Panels ── */
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  transition: border-color var(--transition-fast) ease;
+}
+
+.panel:focus-within {
+  border-color: color-mix(in srgb, #0ea5e9 50%, var(--border));
+}
+
+.inputPanel {
+  border-color: color-mix(in srgb, #0ea5e9 20%, var(--border));
+}
+
+.outputPanel {
+  border-color: color-mix(in srgb, #10b981 20%, var(--border));
+}
+
+/* ── Panel Header ── */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 60%, var(--bg));
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inputPanel .panelTitle::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0ea5e9;
+}
+
+.outputPanel .panelTitle::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.panelHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.charCount {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Copy Button ── */
+.copyBtn {
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.copyBtn:hover:not(:disabled) {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.copyBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.copyBtnSuccess {
+  border-color: #10b981;
+  background: color-mix(in srgb, #10b981 12%, var(--bg));
+  color: #10b981;
+}
+
+/* ── Textarea ── */
+.textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ── Output Area ── */
+.outputArea {
+  padding: 14px 16px;
+  min-height: 180px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  word-break: break-all;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* ── Drop Zone ── */
+.dropZone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  padding: 32px 16px;
+  cursor: pointer;
+  border: 2px dashed color-mix(in srgb, #0ea5e9 30%, var(--border));
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  margin: -1px;
+  transition: all var(--transition-fast) ease;
+  background: transparent;
+}
+
+.dropZone:hover,
+.dropZoneActive {
+  border-color: #0ea5e9;
+  background: color-mix(in srgb, #0ea5e9 6%, transparent);
+}
+
+.dropZoneActive {
+  border-style: solid;
+}
+
+.fileInput {
+  display: none;
+}
+
+.dropContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.dropIcon {
+  font-size: 2rem;
+  opacity: 0.6;
+}
+
+.dropText {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dropHint {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.fileInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fileIcon {
+  font-size: 1.5rem;
+}
+
+.fileName {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (min-width: 768px) {
+  .panels {
+    flex-direction: row;
+  }
+
+  .panel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .textarea,
+  .outputArea,
+  .dropZone {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modeBar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .optionsBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .textarea,
+  .outputArea {
+    font-size: 12px;
+    min-height: 140px;
+  }
+}
