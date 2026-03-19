@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/base64-tool/sw.js', { scope: '/micro-apps/base64-tool/' })})}

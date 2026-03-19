@@ -1,0 +1,9 @@
+{
+  "name": "typing-test",
+  "short_name": "typing-test",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0071e3",
+  "icons": []
+}

@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/cron-gen/sw.js', { scope: '/micro-apps/cron-gen/' })})}
