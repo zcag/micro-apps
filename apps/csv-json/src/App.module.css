@@ -1,0 +1,454 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+}
+
+/* ── Mode Bar ── */
+.modeBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ── Options Bar ── */
+.optionsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.optionsLeft {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.optionsRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.optionGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.optionLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.select {
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition-fast) ease;
+}
+
+.select:focus {
+  border-color: #8b5cf6;
+}
+
+/* ── Toggle Switch ── */
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggleSlider {
+  position: relative;
+  width: 32px;
+  height: 18px;
+  background: var(--border);
+  border-radius: 9px;
+  transition: background var(--transition-fast) ease;
+  flex-shrink: 0;
+}
+
+.toggleSlider::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--transition-fast) ease;
+}
+
+.toggle input:checked + .toggleSlider {
+  background: #8b5cf6;
+}
+
+.toggle input:checked + .toggleSlider::after {
+  transform: translateX(14px);
+}
+
+.toggleLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* ── Panels ── */
+.panels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  transition: border-color var(--transition-fast) ease;
+}
+
+.panel:focus-within {
+  border-color: color-mix(in srgb, #8b5cf6 50%, var(--border));
+}
+
+.inputPanel {
+  border-color: color-mix(in srgb, #8b5cf6 20%, var(--border));
+}
+
+.outputPanel {
+  border-color: color-mix(in srgb, #10b981 20%, var(--border));
+}
+
+/* ── Panel Header ── */
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-secondary) 60%, var(--bg));
+}
+
+.panelTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inputPanel .panelTitle::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #8b5cf6;
+}
+
+.outputPanel .panelTitle::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.panelHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.charCount {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Copy Button ── */
+.copyBtn {
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+}
+
+.copyBtn:hover:not(:disabled) {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.copyBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.copyBtnSuccess {
+  border-color: #10b981;
+  background: color-mix(in srgb, #10b981 12%, var(--bg));
+  color: #10b981;
+}
+
+/* ── Textarea ── */
+.textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px 16px;
+  border: none;
+  outline: none;
+  resize: vertical;
+  background: transparent;
+  color: var(--text);
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+/* ── Output Area ── */
+.outputArea {
+  padding: 14px 16px;
+  min-height: 180px;
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+.placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.errorText {
+  color: var(--error, #ef4444);
+  font-weight: 500;
+}
+
+/* ── Stats Bar ── */
+.statsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.stats {
+  display: flex;
+  gap: 20px;
+}
+
+.stat {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.statLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Table Preview ── */
+.tableWrapper {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: auto;
+  max-height: 500px;
+  background: var(--bg-secondary);
+  animation: fadeIn 0.25s ease;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.th {
+  position: sticky;
+  top: 0;
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text);
+  background: color-mix(in srgb, #8b5cf6 6%, var(--bg-secondary));
+  border-bottom: 2px solid color-mix(in srgb, #8b5cf6 20%, var(--border));
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background var(--transition-fast) ease;
+  z-index: 1;
+}
+
+.th:hover {
+  background: color-mix(in srgb, #8b5cf6 12%, var(--bg-secondary));
+}
+
+.thContent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sortArrow {
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.th:hover .sortArrow {
+  opacity: 1;
+}
+
+.rowNum {
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  min-width: 40px;
+  background: color-mix(in srgb, var(--bg-secondary) 80%, var(--bg));
+  border-right: 1px solid var(--border);
+}
+
+thead .rowNum {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 2px solid color-mix(in srgb, #8b5cf6 20%, var(--border));
+}
+
+.td {
+  padding: 8px 14px;
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+  color: var(--text);
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trAlt {
+  background: color-mix(in srgb, var(--bg) 40%, var(--bg-secondary));
+}
+
+.trAlt .rowNum {
+  background: color-mix(in srgb, var(--bg) 60%, var(--bg-secondary));
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (min-width: 768px) {
+  .panels {
+    flex-direction: row;
+  }
+
+  .panel {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .textarea,
+  .outputArea {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .optionsLeft {
+    gap: 8px;
+  }
+
+  .optionsBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .statsBar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .textarea,
+  .outputArea {
+    font-size: 12px;
+    min-height: 140px;
+  }
+
+  .td {
+    max-width: 150px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .th {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+}
