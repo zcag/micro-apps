@@ -166,13 +166,13 @@ export default function App() {
                 className={styles.limitProgress}
                 style={{
                   width: `${limitProgress}%`,
-                  backgroundColor: limitProgress > 90 ? '#ff3b30' : limitProgress > 75 ? '#ff9500' : 'var(--accent, #0071e3)',
+                  backgroundColor: limitProgress > 90 ? 'var(--error)' : limitProgress > 75 ? 'var(--warning)' : 'var(--accent)',
                 }}
               />
             </div>
           )}
           {hasLimit && (
-            <span className={styles.remaining} style={{ color: remaining < 0 ? '#ff3b30' : 'var(--text-secondary)' }}>
+            <span className={styles.remaining} style={{ color: remaining < 0 ? 'var(--error)' : 'var(--text-secondary)' }}>
               {remaining} characters remaining
             </span>
           )}
