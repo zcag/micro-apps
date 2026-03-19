@@ -1,0 +1,195 @@
+/* ── Container ── */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+/* ── Input Section ── */
+.inputSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--error);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast) ease;
+  font-family: inherit;
+}
+
+.clearBtn:hover {
+  background: rgba(239, 68, 56, 0.1);
+}
+
+.textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color var(--transition-fast) ease;
+  min-height: 100px;
+}
+
+.textarea:focus {
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.textarea::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.statDivider {
+  font-size: 0.7rem;
+  color: var(--border);
+}
+
+/* ── Conversion Grid ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.convCard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast) ease;
+  text-align: left;
+  font-family: inherit;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.convCard:hover {
+  border-color: #f59e0b;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.convCard:active {
+  transform: scale(0.98);
+}
+
+.convCopied {
+  border-color: var(--success);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.convHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+}
+
+.convLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #f59e0b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.convCopyIcon {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.convPreview {
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.4;
+  word-break: break-all;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ── Empty State ── */
+.emptyState {
+  text-align: center;
+  padding: 24px 16px;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.emptyText {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .convCard {
+    padding: 10px;
+  }
+
+  .convPreview {
+    font-size: 0.8rem;
+  }
+}
