@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/diff-checker/sw.js', { scope: '/micro-apps/diff-checker/' })})}

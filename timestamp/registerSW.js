@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/timestamp/sw.js', { scope: '/micro-apps/timestamp/' })})}
