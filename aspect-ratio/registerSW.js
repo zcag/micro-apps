@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/micro-apps/aspect-ratio/sw.js', { scope: '/micro-apps/aspect-ratio/' })})}
